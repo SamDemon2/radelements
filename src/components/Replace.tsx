@@ -19,6 +19,11 @@ const Replace = () => {
             </select>
         </div>
     </div>
+      <div className="row ms-3 me-3 my-3 half-width">
+          <div className="col-md-2">
+          <button type="submit" className="btn btn-primary btn-sm">ОК</button>
+          </div>
+      </div>
   </>
 }
 export default Replace;
