@@ -24,7 +24,7 @@ function getRandomName(): string {
 export function getTestData(count: number): RadioComponent[] {
     const rows: RadioComponent[] = [];
     for (let i = 0; i < count; i++) {
-        rows.push({ id: getRandomNumber(1, count), category: getRandomNumber(1, count), name: getRandomName(), amount: getRandomNumber(0, count * 100) });
+        rows.push({ id: getRandomNumber(1, 45), category: getRandomNumber(1, 30), name: getRandomName(), amount: getRandomNumber(0, count * 10) });
     }
     return rows;
 }
