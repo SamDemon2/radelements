@@ -18,7 +18,7 @@ const Header = () => {
                             <a className="nav-link" href="my-base">Device</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Replace</a>
+                            <a className="nav-link" href="my-replace">Replace</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link">ShowOrder</a>

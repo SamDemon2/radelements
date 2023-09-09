@@ -8,6 +8,7 @@ import MainTable from "./components/MainTable";
 import {Provider, useSelector} from "react-redux";
 import {RootState} from "@reduxjs/toolkit/dist/query/core/apiState";
 import {store} from "./redux/store";
+import Replace from "./components/Replace";
 
 function Layout() {
   return <>
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<MainTable/>}/>
           <Route path="my-base" element={<Base/>}/>
+          <Route path="my-replace" element={<Replace/>}/>
         </Route>
       </Routes>
       </Router>
