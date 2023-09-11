@@ -50,7 +50,7 @@ export function getTestOrdData(count: number): OrderItem[] {
 const initialState: RootState = {
     tableData: {
         components: getTestData(100),
-        order_components: getTestOrdData(50),
+        order_components: getTestOrdData(4),
     },
 };
 

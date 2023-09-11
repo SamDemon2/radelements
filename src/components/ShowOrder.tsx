@@ -37,6 +37,9 @@ const ShowOrder: React.FC = () => {
         )}
         </tbody>
       </table>
+      <div className="d-flex justify-content-start">
+        <button type="submit" className="btn btn-primary btn-sm">Submit</button>
+      </div>
     </div>
   </>
 }
