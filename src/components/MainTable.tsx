@@ -25,7 +25,7 @@ const MainTable: React.FC = () => {
           </thead>
           <tbody>
           {reduxTableData ? (
-              reduxTableData.components.map((item: RadioComponent) => (
+              reduxTableData.tableData.components.map((item: RadioComponent) => (
                   <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.category}</td>

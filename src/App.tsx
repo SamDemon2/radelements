@@ -9,6 +9,7 @@ import {Provider, useSelector} from "react-redux";
 import {RootState} from "@reduxjs/toolkit/dist/query/core/apiState";
 import {store} from "./redux/store";
 import Replace from "./components/Replace";
+import ShowOrder from "./components/ShowOrder";
 
 function Layout() {
   return <>
@@ -39,6 +40,7 @@ function App() {
           <Route index element={<MainTable/>}/>
           <Route path="my-base" element={<Base/>}/>
           <Route path="my-replace" element={<Replace/>}/>
+          <Route path="my-orders" element={<ShowOrder/>}/>
         </Route>
       </Routes>
       </Router>
