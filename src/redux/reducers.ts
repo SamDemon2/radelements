@@ -1,5 +1,4 @@
 import { Reducer } from 'redux';
-import {RootState} from "./store";
 
 export interface RadioComponent {
     id: number;
@@ -14,12 +13,13 @@ export interface OrderItem {
     amount_need: number;
 }
 
-interface AppState {
+// Определите тип RootState здесь
+export type RootState = {
     tableData: {
-        tableData: RadioComponent[];
-        ord_tableData: OrderItem[];
+        components: RadioComponent[];
+        order_components: OrderItem[];
     };
-}
+};
 
 function getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -57,9 +57,9 @@ const initialState: RootState = {
 const rootReducer: Reducer<RootState> = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_TABLE_DATA':
-            return { ...state, tableData: { ...state.tableData, tableData: action.payload } };
+            return { ...state, tableData: { ...state.tableData, components: action.payload } };
         case 'SET_ORD_TABLE_DATA':
-            return { ...state, tableData: { ...state.tableData, ord_tableData: action.payload } };
+            return { ...state, tableData: { ...state.tableData, order_components: action.payload } };
         default:
             return state;
     }

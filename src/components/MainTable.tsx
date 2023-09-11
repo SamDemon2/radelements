@@ -11,8 +11,6 @@ interface RadioComponent {
 
 const MainTable: React.FC = () => {
   const reduxTableData = useSelector((state: RootState) => state.tableData);
-  const reduxOrdTableData = useSelector((state: RootState) => state.ord_tableData);
-
 
   return (
       <div className="ms-3 me-3 my-3">
@@ -26,14 +24,20 @@ const MainTable: React.FC = () => {
           </tr>
           </thead>
           <tbody>
-          {reduxTableData.map((item: RadioComponent) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.category}</td>
-                <td>{item.name}</td>
-                <td>{item.amount}</td>
+          {reduxTableData ? (
+              reduxTableData.components.map((item: RadioComponent) => (
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>{item.category}</td>
+                    <td>{item.name}</td>
+                    <td>{item.amount}</td>
+                  </tr>
+              ))
+          ) : (
+              <tr>
+                <td colSpan={4}>Нет данных</td>
               </tr>
-          ))}
+          )}
           </tbody>
         </table>
       </div>
