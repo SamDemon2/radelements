@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import {RootState} from "./store";
 
 export interface RadioComponent {
     id: number;
@@ -7,8 +8,17 @@ export interface RadioComponent {
     amount: number;
 }
 
+export interface OrderItem {
+    component: string;
+    in_stock: number;
+    amount_need: number;
+}
+
 interface AppState {
-    tableData: RadioComponent[];
+    tableData: {
+        tableData: RadioComponent[];
+        ord_tableData: OrderItem[];
+    };
 }
 
 function getRandomNumber(min: number, max: number): number {
@@ -29,14 +39,27 @@ export function getTestData(count: number): RadioComponent[] {
     return rows;
 }
 
-const initialState: AppState = {
-    tableData: getTestData(100),
+export function getTestOrdData(count: number): OrderItem[] {
+    const rows_ord: OrderItem[] = [];
+    for (let i = 0; i < count; i++) {
+        rows_ord.push({ component: getRandomName(), in_stock: getRandomNumber(1, 45), amount_need: getRandomNumber(1, 45) });
+    }
+    return rows_ord;
+}
+
+const initialState: RootState = {
+    tableData: {
+        components: getTestData(100),
+        order_components: getTestOrdData(50),
+    },
 };
 
-const rootReducer: Reducer<AppState> = (state = initialState, action) => {
+const rootReducer: Reducer<RootState> = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_TABLE_DATA':
-            return { ...state, tableData: action.payload };
+            return { ...state, tableData: { ...state.tableData, tableData: action.payload } };
+        case 'SET_ORD_TABLE_DATA':
+            return { ...state, tableData: { ...state.tableData, ord_tableData: action.payload } };
         default:
             return state;
     }

@@ -1,10 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import rootReducer, { getTestData, RadioComponent } from './reducers';
-import { setTableData } from './actions';
+import rootReducer, { getTestData, getTestOrdData, RadioComponent, OrderItem } from './reducers';
+import { setTableData, setOrdTableData } from './actions';
 
 export interface RootState {
     tableData: {
-        tableData: RadioComponent[];
+        components: RadioComponent[];
+        order_components: OrderItem[];
     };
 }
 
@@ -13,12 +14,16 @@ const combinedReducer = combineReducers({
 });
 
 const initialTableData: RadioComponent[] = getTestData(100);
+const initialOrdTableData: OrderItem[] = getTestOrdData(50);
 
 const store = configureStore({
     reducer: combinedReducer,
     preloadedState: {
-        tableData: { tableData: initialTableData },
+        tableData: {
+            components: initialTableData,
+            order_components: initialOrdTableData
+        },
     },
 });
 
-export { store, setTableData };
+export { store, setTableData, setOrdTableData };

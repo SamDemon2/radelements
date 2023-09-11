@@ -12,10 +12,10 @@ const Replace = () => {
                 <option value="1">Element_1</option>
                 <option value="2">Element_2</option>
                 <option value="3">Element_3</option>
-                <option value="3">Element_4</option>
-                <option value="1">Element_5</option>
-                <option value="2">Element_6</option>
-                <option value="3">Element_7</option>
+                <option value="4">Element_4</option>
+                <option value="5">Element_5</option>
+                <option value="6">Element_6</option>
+                <option value="7">Element_7</option>
             </select>
         </div>
     </div>

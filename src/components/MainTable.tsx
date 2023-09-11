@@ -10,7 +10,9 @@ interface RadioComponent {
 }
 
 const MainTable: React.FC = () => {
-  const reduxTableData = useSelector((state: RootState) => state.tableData.tableData);
+  const reduxTableData = useSelector((state: RootState) => state.tableData);
+  const reduxOrdTableData = useSelector((state: RootState) => state.ord_tableData);
+
 
   return (
       <div className="ms-3 me-3 my-3">
