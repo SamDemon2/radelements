@@ -4,7 +4,6 @@ import { RootState } from '../redux/store';
 
 interface RadioComponent {
   id: number;
-  category: number;
   name: string;
   amount: number;
 }
@@ -18,7 +17,6 @@ const MainTable: React.FC = () => {
           <thead>
           <tr>
             <th>ID</th>
-            <th>Категория</th>
             <th>Название</th>
             <th>Количество</th>
           </tr>
@@ -28,7 +26,6 @@ const MainTable: React.FC = () => {
               reduxTableData.tableData.components.map((item: RadioComponent) => (
                   <tr key={item.id}>
                     <td>{item.id}</td>
-                    <td>{item.category}</td>
                     <td>{item.name}</td>
                     <td>{item.amount}</td>
                   </tr>

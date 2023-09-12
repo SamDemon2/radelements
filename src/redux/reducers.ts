@@ -2,7 +2,6 @@ import { Reducer } from 'redux';
 
 export interface RadioComponent {
     id: number;
-    category: number;
     name: string;
     amount: number;
 }
@@ -34,7 +33,7 @@ function getRandomName(): string {
 export function getTestData(count: number): RadioComponent[] {
     const rows: RadioComponent[] = [];
     for (let i = 0; i < count; i++) {
-        rows.push({ id: getRandomNumber(1, 45), category: getRandomNumber(1, 30), name: getRandomName(), amount: getRandomNumber(0, count * 10) });
+        rows.push({ id: getRandomNumber(1, 45), name: getRandomName(), amount: getRandomNumber(0, count * 10) });
     }
     return rows;
 }
