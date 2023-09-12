@@ -12,27 +12,27 @@ const MainTable: React.FC = () => {
   const reduxTableData = useSelector((state: RootState) => state.tableData);
 
   return (
-      <div className="ms-3 me-3 my-3">
-        <table className="table table-striped">
+      <div className="ms-3 me-3 my-3 d-flex justify-content-center">
+        <table className="table  custom-table table-striped ">
           <thead>
           <tr>
-            <th>ID</th>
-            <th>Название</th>
-            <th>Количество</th>
+            <th className="px-0">ID</th>
+            <th className="px-0">Название</th>
+            <th className="px-0">Количество</th>
           </tr>
           </thead>
           <tbody>
           {reduxTableData ? (
               reduxTableData.tableData.components.map((item: RadioComponent) => (
                   <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.name}</td>
-                    <td>{item.amount}</td>
+                    <td className="px-0">{item.id}</td>
+                    <td className="px-0">{item.name}</td>
+                    <td className="px-0">{item.amount}</td>
                   </tr>
               ))
           ) : (
               <tr>
-                <td colSpan={4}>Нет данных</td>
+                <td colSpan={3}>Нет данных</td>
               </tr>
           )}
           </tbody>
