@@ -8,7 +8,7 @@ const Base = () => {
                 <span> Select device name</span>
             </div>
             <div className="col-md-2">
-        <select className="form-select" aria-label="Default select example">
+        <select className="form-select w-100" aria-label="Default select example">
             <option selected>Select device name</option>
             <option value="1">Device_1</option>
             <option value="2">Device_2</option>
@@ -25,12 +25,12 @@ const Base = () => {
                <span> Select amount</span>
            </div>
            <div className="col-md-2">
-               <input/>
+               <input className="form-control w-100"/>
            </div>
        </div>
         <div className="row my-3">
-            <div className="col-md-2">
-            <button type="submit" className="btn btn-primary btn-sm">Submit</button>
+            <div className="col-md-2 d-flex justify-content-start">
+            <button type="submit" className="btn btn-primary">Submit</button>
             </div>
         </div>
         </div>
