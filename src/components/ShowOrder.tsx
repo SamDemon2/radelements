@@ -12,8 +12,8 @@ const ShowOrder: React.FC = () => {
   const reduxTableData = useSelector((state:RootState) => state.tableData);
 
   return <>
-    <div className="my-3 ms-3 me-3">
-      <table className="table table-striped">
+    <div className=" row my-3 ms-3 me-3 d-flex justify-content-center">
+      <table className="table custom-table table-striped">
         <thead>
           <tr>
             <th>Component</th>
@@ -37,8 +37,8 @@ const ShowOrder: React.FC = () => {
         )}
         </tbody>
       </table>
-      <div className="d-flex justify-content-start">
-        <button type="submit" className="btn btn-primary btn-sm">Submit</button>
+      <div className="">
+        <button type="submit" className="btn btn-primary">Submit</button>
       </div>
     </div>
   </>
