@@ -6,8 +6,8 @@ const Replace = () => {
         <div className="col-md-3 d-flex justify-content-center">
             Select other element
         </div>
-        <div className="col-md-2">
-            <select className="form-select" aria-label="Default select example">
+        <div className="col-md-3">
+            <select className="form-select w-100" aria-label="Default select example">
                 <option selected>--------</option>
                 <option value="1">Element_1</option>
                 <option value="2">Element_2</option>
@@ -21,7 +21,7 @@ const Replace = () => {
     </div>
       <div className="row ms-3 me-3 my-3 half-width">
           <div className="col-md-2">
-          <button type="submit" className="btn btn-primary btn-sm">ОК</button>
+          <button type="submit" className="btn btn-primary">ОК</button>
           </div>
       </div>
   </>
