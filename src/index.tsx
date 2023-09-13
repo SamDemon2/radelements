@@ -1,20 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'; // Изменили импорт
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-);
-root.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
-);
+const domNode = document.getElementById('root'); // Получаем DOM-элемент
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+if (domNode) { // Проверяем, существует ли элемент
+    const root = createRoot(domNode); // Создаем корень приложения
+
+    root.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    );
+
+    // Если вы хотите измерить производительность вашего приложения, передайте функцию для логирования результатов
+    // (например: reportWebVitals(console.log)) или отправьте их на аналитический сервер. Узнать больше: https://bit.ly/CRA-vitals
+    reportWebVitals();
+}
