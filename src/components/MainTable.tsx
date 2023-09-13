@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import Modal from "./Modal";
-import LoginForm from "./Аuthentication";
 
 interface RadioComponent {
   id: number;
@@ -13,12 +11,6 @@ interface RadioComponent {
 const MainTable: React.FC = () => {
   const reduxTableData = useSelector((state: RootState) => state.tableData);
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  const closemodal = () => {
-    setIsModalOpen(false);
-    console.log('Modal closed');
-  };
 
   return (
       <div className="ms-3 me-3 my-3 d-flex justify-content-center">
@@ -46,9 +38,6 @@ const MainTable: React.FC = () => {
           )}
           </tbody>
         </table>
-        <Modal isOpen={isModalOpen} onClose={closemodal}>
-            <LoginForm/>
-        </Modal>
       </div>
   );
 };

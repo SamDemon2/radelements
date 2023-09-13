@@ -8,6 +8,7 @@ import {Provider} from "react-redux";
 import {store} from "./redux/store";
 import Replace from "./components/Replace";
 import ShowOrder from "./components/ShowOrder";
+import LoginForm from "./components/Аuthentication";
 
 
 function Layout() {
@@ -36,10 +37,12 @@ function App() {
       <Router>
       <Routes>
         <Route path="/" element={<Layout/>}>
-          <Route index element={<MainTable/>}/>
+          <Route index element={<LoginForm/>}/>
+          <Route path="my-table" element={<MainTable/>}/>
           <Route path="my-base" element={<Base/>}/>
           <Route path="my-replace" element={<Replace/>}/>
           <Route path="my-orders" element={<ShowOrder/>}/>
+          <Route path="my-auth" element={<LoginForm/>}/>
         </Route>
       </Routes>
       </Router>
