@@ -22,7 +22,7 @@ function Layout() {
 function App() {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Используем useNavigate для перенаправления
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,16 +37,19 @@ function App() {
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
-    navigate('/my-table');
+    navigate('/my-table'); // Используем navigate для перенаправления
   };
 
   return (
       <Provider store={store}>
         <div className="App">
-          <Routes> {/* Используйте Routes здесь */}
+          <Routes>
             <Route path="/" element={<Layout />}>
               {isLoggedIn ? (
-                  <Navigate to="/my-table" />
+                  // Используем navigate для перенаправления
+                  <React.Fragment>
+                  navigate('/my-table')
+                  </React.Fragment>
               ) : (
                   <Route
                       index
