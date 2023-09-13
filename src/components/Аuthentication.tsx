@@ -25,7 +25,7 @@ const LoginForm = () => {
     };
 
     return (
-        <div>
+        <div className="my-3 ms-3 me-3">
             <h2>Авторизация</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
