@@ -1,22 +1,25 @@
+// Ваш index.js или index.tsx
+
 import React from 'react';
-import { createRoot } from 'react-dom/client'; // Изменили импорт
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom'; // Импортируем BrowserRouter
 
-const domNode = document.getElementById('root'); // Получаем DOM-элемент
+const domNode = document.getElementById('root');
 
-if (domNode) { // Проверяем, существует ли элемент
-    const root = createRoot(domNode); // Создаем корень приложения
+if (domNode) {
+    const root = createRoot(domNode);
 
     root.render(
         <React.StrictMode>
-            <App />
+            <Router> {/* Оборачиваем App в Router */}
+                <App />
+            </Router>
         </React.StrictMode>
     );
 
-    // Если вы хотите измерить производительность вашего приложения, передайте функцию для логирования результатов
-    // (например: reportWebVitals(console.log)) или отправьте их на аналитический сервер. Узнать больше: https://bit.ly/CRA-vitals
     reportWebVitals();
 }
