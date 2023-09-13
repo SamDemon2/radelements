@@ -31,6 +31,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         if (success) {
             onLoginSuccess(); // Вызываем функцию успешной авторизации
         }
+        else {
+            // Добавьте здесь обработку случая неверных данных, например, вывод ошибки
+            console.log("Неверный логин или пароль");
+        }
     };
 
     return (
