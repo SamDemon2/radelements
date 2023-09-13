@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import {User} from "./authActions";
 
 export interface RadioComponent {
     id: number;
@@ -59,6 +60,17 @@ const rootReducer: Reducer<RootState> = (state = initialState, action) => {
             return { ...state, tableData: { ...state.tableData, components: action.payload } };
         case 'SET_ORD_TABLE_DATA':
             return { ...state, tableData: { ...state.tableData, order_components: action.payload } };
+        default:
+            return state;
+    }
+};
+
+export const authReducer: Reducer<User | null> = (state = null, action) => {
+    switch (action.type){
+        case 'LOGIN':
+            return action.payload;
+        case 'LOGOUT':
+            return null;
         default:
             return state;
     }

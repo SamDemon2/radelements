@@ -1,8 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers';
+import rootReducer, {authReducer} from './reducers';
 
 const combinedReducer = combineReducers({
     tableData: rootReducer,
+    user: authReducer,
 });
 
 const store = configureStore({

@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Base from "./components/Base";
 import Header from "./components/Header";
-import {BrowserRouter as Router, Route, Routes, Navigate, Outlet} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Outlet} from 'react-router-dom';
 import MainTable from "./components/MainTable";
-import {Provider, useSelector} from "react-redux";
-import {RootState} from "@reduxjs/toolkit/dist/query/core/apiState";
+import {Provider} from "react-redux";
 import {store} from "./redux/store";
 import Replace from "./components/Replace";
 import ShowOrder from "./components/ShowOrder";
+
 
 function Layout() {
   return <>
