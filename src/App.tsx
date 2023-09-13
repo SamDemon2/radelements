@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Base from "./components/Base";
 import Header from "./components/Header";
-import { Route, Routes, Outlet, useNavigate, Navigate } from 'react-router-dom'; // Обратите внимание на удаление BrowserRouter
+import { Route, Routes, Outlet, useNavigate} from 'react-router-dom'; // Обратите внимание на удаление BrowserRouter
 import MainTable from "./components/MainTable";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
