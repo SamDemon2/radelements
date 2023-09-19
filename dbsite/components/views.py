@@ -29,10 +29,7 @@ def index(request):
     return render(request, "components/index.html", {"title": "Main page", "menu": menu, "components": components})
 
 
-
 class DeviceAPI(APIView):
-    # form = SelectDeviceForm()
-
     # def get(self, request):
     #     return Response({"menu": menu})
 
@@ -173,7 +170,7 @@ class ShowOrderAPI(APIView):
                     for c in comp_for_rep:
                         # print(c)
                         cur.execute(f"INSERT INTO components_replace( comp_name, cat) VALUES(?, ?)", (c[0], cat_rep))
-                    return redirect("replace")
+                    return redirect("replace" + "/1")
             count = 0
             for comp in comp_name:
                 new_amount = in_stock[count] - amount_need[count]
@@ -223,7 +220,6 @@ class ReplaceAPI(APIView):
 
     # def get(self, request):
     #     return Response({"menu": menu})
-
     def post(self, request):
         serializer = ReplaceSerializer(data=request.data)
         serializer.is_valid()
@@ -236,19 +232,19 @@ class ReplaceAPI(APIView):
 
 
 
-def replace(request):
-    form = ReplaceComponent(request.POST)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            comp_name = form.cleaned_data["replacement_choice"]
-            print(comp_name, "------")
-            in_stock = Components.objects.filter(comp_name=comp_name).values("amount")
-            # return redirect("home")
-            OrderData.objects.filter(enough=0).update(enough=1, comp_name=str(comp_name), in_stock=in_stock)
-            return redirect("show")
-
-    return render(request, "components/replace.html", {"form": form})
+# def replace(request):
+#     form = ReplaceComponent(request.POST)
+#
+#     if request.method == 'POST':
+#         if form.is_valid():
+#             comp_name = form.cleaned_data["replacement_choice"]
+#             print(comp_name, "------")
+#             in_stock = Components.objects.filter(comp_name=comp_name).values("amount")
+#             # return redirect("home")
+#             OrderData.objects.filter(enough=0).update(enough=1, comp_name=str(comp_name), in_stock=in_stock)
+#             return redirect("show")
+#
+#     return render(request, "components/replace.html", {"form": form})
 
 
 def pageNotFound(request, exception):
