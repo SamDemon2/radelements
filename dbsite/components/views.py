@@ -32,7 +32,6 @@ def index(request):
 class DeviceAPI(APIView):
     # def get(self, request):
     #     return Response({"menu": menu})
-
     def post(self, request):
         comp_ids = []
         amount_need = []
@@ -42,6 +41,7 @@ class DeviceAPI(APIView):
         serializer = CompSerializer(data=request.data)
         serializer.is_valid()
         name = request.data["device_name"]
+        print(request.data)
         device_need = request.data["device_need"]
         print(name)
         print(device_need)
