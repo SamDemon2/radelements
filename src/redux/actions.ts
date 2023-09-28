@@ -13,6 +13,12 @@ export const setOrdTableData = (data: OrderItem[]): { type: string; payload: Ord
     payload: data,
 });
 
+export const setShowData = (data: OrderItem[]): { type: string; payload: OrderItem[] } => ({
+    type: 'SET_SHOW_DATA',
+    payload: data,
+});
+
+
 export const fetchTableData = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
         try {
@@ -39,3 +45,23 @@ export const fetchTableData = () => {
         }
     };
 };
+
+export const fetchShowData = () => {
+    return async (dispatch: Dispatch, getState: () => RootState) => {
+        try {
+            const response = await axios.get('http://localhost:8000/api/v1/show/');
+            const data = response.data.order_data;
+
+            const showData = data.map((item: any) => ({
+                component: item.comp_name,
+                in_stock: item.in_stock,
+                amount_need: item.amount_need,
+            }));
+
+            dispatch(setShowData(showData));
+        } catch (error) {
+            console.error('Error fetching show data:', error);
+        }
+    };
+};
+

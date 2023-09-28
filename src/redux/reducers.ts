@@ -17,6 +17,7 @@ export interface RootState {
     tableData: {
         components: RadioComponent[];
         order_components: OrderItem[];
+        show_components: OrderItem[];
     };
     user: User | null;
 }
@@ -51,6 +52,7 @@ const initialState: RootState = {
     tableData: {
         components: [],
         order_components: [],
+        show_components: [],
     },
     user: null,
 };
@@ -61,6 +63,8 @@ const tableDataReducer: Reducer<RootState["tableData"]> = (state = initialState.
             return { ...state, components: action.payload };
         case 'SET_ORD_TABLE_DATA':
             return { ...state, order_components: action.payload };
+        case 'SET_SHOW_DATA':
+            return { ...state, show_components: action.payload };
         default:
             return state;
     }
