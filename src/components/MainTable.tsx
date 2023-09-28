@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
+import Test_API from '../api/ApiTest_1';
 import { RootState } from '../redux/store';
 
 interface RadioComponent {
@@ -38,6 +39,7 @@ const MainTable: React.FC = () => {
           )}
           </tbody>
         </table>
+        <Test_API/>
       </div>
   );
 };
