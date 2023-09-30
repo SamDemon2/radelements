@@ -18,6 +18,11 @@ export const setShowData = (data: OrderItem[]): { type: string; payload: OrderIt
     payload: data,
 });
 
+// Добавляем новое действие для добавления элемента в базу данных
+export const addElementToDatabase = (element: RadioComponent): { type: string; payload: RadioComponent } => ({
+    type: "ADD_ELEMENT_TO_DB",
+    payload: element,
+});
 
 export const fetchTableData = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
@@ -64,4 +69,3 @@ export const fetchShowData = () => {
         }
     };
 };
-
