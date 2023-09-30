@@ -7,8 +7,8 @@ class Components(models.Model):
     comp_name = models.CharField(max_length=255)
     amount = models.IntegerField()
 
-    def __str__(self):
-        return self.comp_name
+    # def __str__(self):
+    #     return self.comp_name
 
 
 class Devices(models.Model):

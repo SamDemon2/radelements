@@ -246,6 +246,18 @@ class ReplaceAPI(APIView):
 #
 #     return render(request, "components/replace.html", {"form": form})
 
+class UpdateDBAPI(APIView):
+    def post(self, request):
+        serializer = UpdateSerializer(data=request.data)
+        serializer.is_valid()
+        comp_name = request.data["comp_name"]
+        amount_add = request.data["amount_add"]
+        component = Components.objects.get(comp_name=comp_name)
+        # print(component)
+        new_amount = component.amount + amount_add
+        Components.objects.filter(comp_name=comp_name).update(amount=new_amount)
+        return redirect("update")
+
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Page not found</h1>")

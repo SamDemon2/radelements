@@ -9,8 +9,14 @@ class IndexSerializer(serializers.ModelSerializer):
 
 
 class CompSerializer(serializers.Serializer):
-    device_name = serializers.CharField(max_length=255)
+    comp_name = serializers.CharField(max_length=255)
     amount_need = serializers.IntegerField()
+
+
+class UpdateSerializer(serializers.Serializer): # new
+    device_name = serializers.CharField(max_length=255)
+    amount_add = serializers.IntegerField()
+
 
 
 class ShowSerializer(serializers.Serializer):
