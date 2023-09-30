@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { RootState, RadioComponent, OrderItem } from "./reducers"; // Импортируем интерфейсы из reducers
+import {RootState, RadioComponent, OrderItem, ReplacementChoice} from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
 
 // Указываем новые интерфейсы для параметров
@@ -19,20 +19,20 @@ export const setShowData = (data: OrderItem[]) => ({
 });
 
 // Добавляем новое действие для добавления элемента в базу данных
-export const addElementToDatabase = (radioComponent: RadioComponent) => ({
+export const addElementToDatabase = (replacementChoice: ReplacementChoice) => ({
     type: "ADD_ELEMENT_TO_DB",
-    payload: radioComponent,
+    payload: replacementChoice,
 });
 
-export const sendElementToServer = (radioComponent: RadioComponent) => {
+export const sendElementToServer = (replacementChoice: ReplacementChoice) => {
     return async (dispatch: Dispatch) => {
         try {
-            await axios.post('http://127.0.0.1:8000/api/v1/replace', radioComponent);
+            await axios.post('http://127.0.0.1:8000/api/v1/replace/', replacementChoice);
             // Обработка успешного ответа от сервера, если необходимо
             console.log("Element successfully sent to the backend");
 
             // Вызываем действие ADD_ELEMENT_TO_DB с данными
-            dispatch(addElementToDatabase(radioComponent));
+            dispatch(addElementToDatabase(replacementChoice));
         } catch (error) {
             // Обработка ошибки, если что-то пошло не так
             console.error("Error sending element to the backend:", error);

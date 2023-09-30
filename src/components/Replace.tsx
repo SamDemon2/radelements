@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { sendElementToServer } from "../redux/actions";
 import { useDispatch } from "react-redux";
-import { RadioComponent } from "../redux/reducers";
+import {ReplacementChoice} from "../redux/reducers";
 
 const Replace = () => {
     const [selectedElement, setSelectedElement] = useState("");
@@ -13,8 +13,8 @@ const Replace = () => {
 
     const handleAddToDatabase = () => {
         if (selectedElement) {
-            const radioComponent: RadioComponent = { id: 0, name: selectedElement, amount: 0 };
-            dispatch(sendElementToServer(radioComponent) as any).then(() => {
+            const replacementChoice: ReplacementChoice = { replacement_choice: selectedElement };
+            dispatch(sendElementToServer(replacementChoice) as any).then(() => {
                 setSelectedElement("");
             });
 
