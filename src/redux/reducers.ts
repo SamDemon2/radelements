@@ -24,31 +24,6 @@ export interface RootState {
     user: User | null;
 }
 
-function getRandomNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomName(): string {
-    const names: string[] = ['Resistor395', 'Capacitor123', 'Inductor789', 'Transistor456'];
-    const randomIndex: number = getRandomNumber(0, names.length - 1);
-    return names[randomIndex];
-}
-
-export function getTestData(count: number): RadioComponent[] {
-    const rows: RadioComponent[] = [];
-    for (let i = 0; i < count; i++) {
-        rows.push({ id: getRandomNumber(1, 45), name: getRandomName(), amount: getRandomNumber(0, count * 10) });
-    }
-    return rows;
-}
-
-export function getTestOrdData(count: number): OrderItem[] {
-    const rows_ord: OrderItem[] = [];
-    for (let i = 0; i < count; i++) {
-        rows_ord.push({ component: getRandomName(), in_stock: getRandomNumber(1, 45), amount_need: getRandomNumber(1, 45) });
-    }
-    return rows_ord;
-}
 
 // Определяем типы действий
 type ActionTypes =

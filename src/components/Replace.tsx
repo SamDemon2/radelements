@@ -1,29 +1,23 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { sendElementToServer } from "../redux/actions";
+import { useDispatch } from "react-redux";
+import { RadioComponent } from "../redux/reducers";
 
 const Replace = () => {
-    const [selectedElement, setSelectedElement] = useState(""); // Состояние для выбранного элемента
+    const [selectedElement, setSelectedElement] = useState("");
+    const dispatch = useDispatch();
 
-    // Обработчик изменения выбора элемента
     const handleElementChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedElement(event.target.value);
     };
 
-    // Обработчик нажатия кнопки "ОК"
     const handleAddToDatabase = () => {
         if (selectedElement) {
-            const radioComponent = { name: selectedElement, amount: 0 }; // Уберите id и amount, если они не нужны
-            axios.post('http://127.0.0.1:8000/api/v1/replace', radioComponent)
-                .then(() => { // Удален параметр response
-                    // Обработка успешного ответа от сервера, если необходимо
-                    console.log("Element successfully sent to the backend");
-                })
-                .catch(error => {
-                    // Обработка ошибки, если что-то пошло не так
-                    console.error("Error sending element to the backend:", error);
-                });
+            const radioComponent: RadioComponent = { id: 0, name: selectedElement, amount: 0 };
+            dispatch(sendElementToServer(radioComponent) as any).then(() => {
+                setSelectedElement("");
+            });
 
-            setSelectedElement(""); // Очищаем выбранный элемент после отправки
         }
     };
 

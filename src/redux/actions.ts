@@ -1,28 +1,45 @@
-import axios from "axios";
 import { Dispatch } from "redux";
 import { RootState, RadioComponent, OrderItem } from "./reducers"; // Импортируем интерфейсы из reducers
+import axios from "axios";
 
 // Указываем новые интерфейсы для параметров
-export const setTableData = (data: RadioComponent[]): { type: string; payload: RadioComponent[] } => ({
+export const setTableData = (data: RadioComponent[]) => ({
     type: 'SET_TABLE_DATA',
     payload: data,
 });
 
-export const setOrdTableData = (data: OrderItem[]): { type: string; payload: OrderItem[] } => ({
+export const setOrdTableData = (data: OrderItem[]) => ({
     type: 'SET_ORD_TABLE_DATA',
     payload: data,
 });
 
-export const setShowData = (data: OrderItem[]): { type: string; payload: OrderItem[] } => ({
+export const setShowData = (data: OrderItem[]) => ({
     type: 'SET_SHOW_DATA',
     payload: data,
 });
 
 // Добавляем новое действие для добавления элемента в базу данных
-export const addElementToDatabase = (element: RadioComponent): { type: string; payload: RadioComponent } => ({
+export const addElementToDatabase = (radioComponent: RadioComponent) => ({
     type: "ADD_ELEMENT_TO_DB",
-    payload: element,
+    payload: radioComponent,
 });
+
+export const sendElementToServer = (radioComponent: RadioComponent) => {
+    return async (dispatch: Dispatch) => {
+        try {
+            await axios.post('http://127.0.0.1:8000/api/v1/replace', radioComponent);
+            // Обработка успешного ответа от сервера, если необходимо
+            console.log("Element successfully sent to the backend");
+
+            // Вызываем действие ADD_ELEMENT_TO_DB с данными
+            dispatch(addElementToDatabase(radioComponent));
+        } catch (error) {
+            // Обработка ошибки, если что-то пошло не так
+            console.error("Error sending element to the backend:", error);
+        }
+    };
+};
+
 
 export const fetchTableData = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
