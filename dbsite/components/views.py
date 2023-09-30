@@ -214,10 +214,7 @@ class ShowOrderAPI(APIView):
 #                 return redirect("replace")
 #
 #     return render(request, "components/show_order.html", {"info": info})
-
-
 class ReplaceAPI(APIView):
-
     # def get(self, request):
     #     return Response({"menu": menu})
     def post(self, request):
@@ -256,7 +253,7 @@ class UpdateDBAPI(APIView):
         # print(component)
         new_amount = component.amount + amount_add
         Components.objects.filter(comp_name=comp_name).update(amount=new_amount)
-        return redirect("update")
+        return redirect("home")
 
 
 def pageNotFound(request, exception):
