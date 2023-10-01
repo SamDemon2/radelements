@@ -247,12 +247,13 @@ class UpdateDBAPI(APIView):
     def post(self, request):
         serializer = UpdateSerializer(data=request.data)
         serializer.is_valid()
-        comp_name = request.data["comp_name"]
-        amount_add = request.data["amount_add"]
-        component = Components.objects.get(comp_name=comp_name)
-        # print(component)
-        new_amount = component.amount + amount_add
-        Components.objects.filter(comp_name=comp_name).update(amount=new_amount)
+        for comp in request.data:
+            comp_name = comp["comp_name"]
+            amount_add = comp["amount_add"]
+            component = Components.objects.get(comp_name=comp_name)
+            # print(component)
+            new_amount = component.amount + amount_add
+            Components.objects.filter(comp_name=comp_name).update(amount=new_amount)
         return redirect("home")
 
 
