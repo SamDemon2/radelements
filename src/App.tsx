@@ -8,7 +8,8 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Replace from "./components/Replace";
 import ShowOrder from "./components/ShowOrder";
-import LoginForm from "./components/Аuthentication"; // Обратите внимание на исправленное имя компонента
+import LoginForm from "./components/Аuthentication";
+import AddComponents from "./components/AddComponents"; // Обратите внимание на исправленное имя компонента
 
 function Layout() {
   return (
@@ -64,6 +65,7 @@ function App() {
               <Route path="my-base" element={<Base />} />
               <Route path="my-replace" element={<Replace />} />
               <Route path="my-orders" element={<ShowOrder />} />
+              <Route path ="my-add" element={<AddComponents/>}/>
               <Route path="my-auth" element={<LoginForm onLoginSuccess={handleLoginSuccess} />} />
             </Route>
           </Routes>

@@ -24,6 +24,9 @@ const Header = () => {
                             <a className="nav-link" href="my-orders">ShowOrder</a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link" href="my-add">AddComponents</a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="my-auth">Authentication</a>
                         </li>
                     </ul>
