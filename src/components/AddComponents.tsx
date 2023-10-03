@@ -1,5 +1,4 @@
 import React from "react";
-import TrickyForm from "./TrickyForm";
 import Dropdown from "./TrickyForm";
 
 const AddComponents = () => {
