@@ -2,20 +2,28 @@ import React, { useState } from 'react';
 
 const options = [
     {
-        label: 'Вариант 1',
+        label: 'Class 1',
         subOptions: [
-            'Дополнительный вариант 1-1',
-            'Дополнительный вариант 1-2',
-            'Дополнительный вариант 1-3',
+            'Class 1 Name 1',
+            'Class 1 Name 2',
+            'Class 1 Name 3',
         ],
     },
     {
-        label: 'Вариант 2',
-        subOptions: ['Дополнительный вариант 2-1', 'Дополнительный вариант 2-2'],
+        label: 'Class 2',
+        subOptions: [
+            'Class 2 Name 1',
+            'Class 2 Name 2',
+            'Class 2 Name 3',
+        ],
     },
     {
-        label: 'Вариант 3',
-        subOptions: ['Дополнительный вариант 3-1', 'Дополнительный вариант 3-2'],
+        label: 'Class 3',
+        subOptions: [
+            'Class 3 Name 1',
+            'Class 3 Name 2',
+            'Class 3 Name 3',
+        ],
     },
 ];
 
