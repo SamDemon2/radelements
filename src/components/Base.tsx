@@ -7,7 +7,7 @@ const Base = () => {
             <div className="col-md-2 d-flex">
                 <span> Select device name</span>
             </div>
-            <div className="col-md-2">
+            <div className="col-md-3">
         <select className="form-select w-100" aria-label="Default select example">
             <option selected>Select device name</option>
             <option value="1">Device_1</option>
@@ -24,7 +24,7 @@ const Base = () => {
            <div className="col-md-2 d-flex">
                <span> Select amount</span>
            </div>
-           <div className="col-md-2">
+           <div className="col-md-3">
                <input className="form-control w-100"/>
            </div>
        </div>

@@ -5,7 +5,7 @@ const AddComponents = () => {
   return <>
       <div className="ms-3 me-3">
         <div className="row my-3">
-            <div className="col-3">
+            <div className="col-6">
                 comp_name
             </div>
             <div className="col-6">
@@ -13,11 +13,11 @@ const AddComponents = () => {
             </div>
         </div>
           <div className="row my-3">
-              <div className="col-3">
+              <div className="col-6">
                   amount_add
               </div>
-              <div className="col-3 d-flex justify-content-center">
-                    <input className="w-100"/>
+              <div className="col-6">
+
               </div>
           </div>
       </div>
