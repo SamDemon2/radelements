@@ -50,7 +50,7 @@ const Dropdown = () => {
                             </label>
                             <input
                                 type="text"
-                                className="form-control"
+                                className="form-control w-100"
                                 id="selectedOption"
                                 value={formValue}
                                 readOnly
