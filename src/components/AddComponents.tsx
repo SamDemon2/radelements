@@ -1,22 +1,28 @@
 import React from "react";
 import Dropdown from "./TrickyForm";
+import IntermediateTable from "./IntermediateTable";
 
 const AddComponents = () => {
   return <>
       <div className="ms-3 me-3">
         <div className="row my-3">
-            <div className="row my-3 bold-text d-flex justify-content-center">
-                Add current comp
+            <div className="row my-3 bold-text d-flex justify-content-start">
+                <div className="col-6">
+                    Add current comp
+                </div>
             </div>
-            <div className="col-6">
+            <div className="col-2">
                 comp_name
             </div>
             <div className="col-6">
                 <Dropdown/>
             </div>
+            <div className="col-4">
+                <IntermediateTable/>
+            </div>
         </div>
           <div className="row my-3">
-              <div className="col-6">
+              <div className="col-2">
                   amount_add
               </div>
               <div className="col-3 d-flex justify-content-center">
@@ -24,12 +30,15 @@ const AddComponents = () => {
               </div>
           </div>
           <div className="row my-4">
-              <div className="row my-3 bold-text d-flex justify-content-center">
+              <div className="row my-3 bold-text d-flex justify-content-start">
+                  <div className="col-6">
                   Add new element
+                  </div>
+
               </div>
           </div>
           <div className="row my-3">
-            <div className="col-6">
+            <div className="col-2">
                 Comp_name
             </div>
               <div className="col-3">
@@ -37,7 +46,7 @@ const AddComponents = () => {
               </div>
           </div>
           <div className="row my-3">
-              <div className="col-6">
+              <div className="col-2">
                   Comp_name
               </div>
               <div className="col-3">
@@ -45,7 +54,7 @@ const AddComponents = () => {
               </div>
           </div>
           <div className="row my-3">
-              <div className="col-6">
+              <div className="col-2">
                   Category
               </div>
             <div className="col-3 d-flex justify-content-center">
@@ -58,19 +67,23 @@ const AddComponents = () => {
             </div>
           </div>
           <div className="row my-3">
-            <div className="col-6">
+            <div className="col-2">
                 Amount
             </div>
             <div className="col-3">
                 <input className="w-100"/>
             </div>
-              <div className="row my-3 d-flex justify-content-center">
+              <div className="row  my-3 d-flex justify-content-start">
                   <div className="col-2">
+
+                  </div>
+                  <div className="col-1 d-flex justify-content-end">
                       <button className="btn btn-primary">
                           Submit
                       </button>
                   </div>
-                  <div className="col-2">
+                  <div className="col-1"></div>
+                  <div className="col-1 d-flex justify-content-start">
                     <button className=" btn btn-primary">
                         Add over
                     </button>
