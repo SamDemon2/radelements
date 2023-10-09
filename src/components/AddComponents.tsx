@@ -33,7 +33,7 @@ const AddComponents = () => {
                 Comp_name
             </div>
               <div className="col-3">
-                <input/>
+                <input className="w-100"/>
               </div>
           </div>
           <div className="row my-3">
@@ -41,7 +41,7 @@ const AddComponents = () => {
                   Comp_name
               </div>
               <div className="col-3">
-                  <input/>
+                  <input className="w-100"/>
               </div>
           </div>
           <div className="row my-3">
@@ -49,7 +49,7 @@ const AddComponents = () => {
                   Category
               </div>
             <div className="col-3 d-flex justify-content-center">
-                <select className="form-select w-75" aria-label="Default select example">
+                <select className="form-select w-100" aria-label="Default select example">
                     <option selected>Open this select menu</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -62,7 +62,7 @@ const AddComponents = () => {
                 Amount
             </div>
             <div className="col-3">
-                <input/>
+                <input className="w-100"/>
             </div>
               <div className="row my-3 d-flex justify-content-center">
                   <div className="col-2">
