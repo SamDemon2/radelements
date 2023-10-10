@@ -47,14 +47,6 @@ const AddComponents = () => {
           </div>
           <div className="row my-3">
               <div className="col-2">
-                  Comp_name
-              </div>
-              <div className="col-3">
-                  <input className="w-100"/>
-              </div>
-          </div>
-          <div className="row my-3">
-              <div className="col-2">
                   Category
               </div>
             <div className="col-3 d-flex justify-content-center">

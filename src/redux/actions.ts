@@ -86,3 +86,13 @@ export const fetchShowData = () => {
         }
     };
 };
+
+// export const setIntermediateComp = (intercomps) => ({
+//     type: 'SET_INTERMEDIATE_COMPONENTS',
+//     payload: data,
+// });
+//
+// export const setIntermediateData = (data) => ({
+//    type: 'SET_INTERMEDIATE_DATA',
+//    payload: data,
+// });
