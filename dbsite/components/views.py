@@ -1,6 +1,7 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
@@ -18,6 +19,19 @@ menu = [
 class CompAPIView(generics.ListAPIView):
     queryset = Components.objects.all()
     serializer_class = IndexSerializer
+    permission_classes = (IsAuthenticated, )
+
+
+# class CompListAPIView(generics.ListAPIView):
+#     def custom_query(self):
+#         with sqlite3.connect("db.sqlite3") as connection:
+#             cur = connection.cursor()
+#             query = """SELECT comp_id, comp_name, cat_name, amount FROM components_components
+#                         INNER JOIN components_category ON components_components.cat = components_category.cat_id"""
+#             cur.execute(query)
+#             result = cur.fetchall()
+#             return result
+#
 
 
 def index(request):

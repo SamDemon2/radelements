@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include, re_path
 from components.views import *
 from dbsite.yasg import urlpatterns as doc_urls
 
@@ -7,8 +7,10 @@ urlpatterns = [
     path("api/v1/add/", DeviceAPI.as_view(), name="device"),
     path("api/v1/show/", ShowOrderAPI.as_view(), name="show"),
     path("api/v1/replace/", ReplaceAPI.as_view(), name="replace"),
-    path("api/v1/update/", UpdateDBAPI.as_view(), name="update")
-
+    path("api/v1/update/", UpdateDBAPI.as_view(), name="update"),
+    path("api/v1/drf_auth/", include("rest_framework.urls")),
+    path("api/v1/auth/", include("djoser.urls")),
+    re_path(r"^auth/", include("djoser.urls.authtoken")),
 ]
 
 urlpatterns += doc_urls

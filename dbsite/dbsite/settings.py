@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "components.apps.ComponentsConfig",
     "rest_framework",
     "drf_yasg",
+    "rest_framework.authtoken",
+    "djoser",
 ]
 
 MIDDLEWARE = [
@@ -136,6 +138,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata',
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+     ]
 }
 
 CORS_ALLOWED_ORIGINS = [
@@ -145,4 +153,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:9000",
     "http://localhost:3000",
 ]
-CORS_ALLOW_ALL_ORIGINS = True;
+CORS_ALLOW_ALL_ORIGINS = True
+

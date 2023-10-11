@@ -3,6 +3,7 @@ from .models import *
 
 
 class IndexSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Components
         fields = ("comp_id", "comp_name", "amount")
