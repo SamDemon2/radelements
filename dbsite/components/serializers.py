@@ -1,3 +1,4 @@
+from djoser.serializers import UserCreateSerializer
 from rest_framework import serializers
 from .models import *
 
@@ -30,3 +31,11 @@ class ShowSerializer(serializers.Serializer):
 
 class ReplaceSerializer(serializers.Serializer):
     replacement_choice = serializers.CharField(max_length=255)
+
+
+class UserCreateDisabledSerializer(UserCreateSerializer):
+    def validate(self, attrs):
+        raise serializers.ValidationError("Regstration is disabled.")  # Выбросить ошибку при попытке регистрации
+
+    def save(self):
+        return super().save()

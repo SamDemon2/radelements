@@ -40,6 +40,7 @@ def index(request):
 
 
 class DeviceAPI(APIView):
+    permission_classes = (IsAuthenticated,)
     def post(self, request):
         comp_ids = []
         amount_need = []
@@ -89,7 +90,7 @@ class DeviceAPI(APIView):
 
 
 class ShowOrderAPI(APIView):
-
+    permission_classes = (IsAuthenticated,)
     def get(self, request):
         info = OrderData.objects.all()
         comp_name = []
@@ -125,8 +126,7 @@ class ShowOrderAPI(APIView):
 
 
 class ReplaceAPI(APIView):
-    # def get(self, request):
-    #     return Response({"menu": menu})
+    permission_classes = (IsAuthenticated, )
     def post(self, request):
         serializer = ReplaceSerializer(data=request.data)
         serializer.is_valid()
@@ -138,6 +138,7 @@ class ReplaceAPI(APIView):
 
 
 class UpdateDBAPI(APIView):
+    permission_classes = (IsAuthenticated,)
     def post(self, request):
         serializer = UpdateSerializer(data=request.data)
         serializer.is_valid()
