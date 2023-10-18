@@ -19,7 +19,7 @@ menu = [
 class CompAPIView(generics.ListAPIView):
     queryset = Components.objects.all()
     serializer_class = IndexSerializer
-    permission_classes = (IsAuthenticated, )
+    # permission_classes = (IsAuthenticated, )
 
 
 # class CompListAPIView(generics.ListAPIView):
@@ -40,7 +40,7 @@ def index(request):
 
 
 class DeviceAPI(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     def post(self, request):
         comp_ids = []
         amount_need = []
@@ -90,7 +90,7 @@ class DeviceAPI(APIView):
 
 
 class ShowOrderAPI(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     def get(self, request):
         info = OrderData.objects.all()
         comp_name = []
@@ -126,7 +126,7 @@ class ShowOrderAPI(APIView):
 
 
 class ReplaceAPI(APIView):
-    permission_classes = (IsAuthenticated, )
+    # permission_classes = (IsAuthenticated, )
     def post(self, request):
         serializer = ReplaceSerializer(data=request.data)
         serializer.is_valid()
@@ -138,7 +138,7 @@ class ReplaceAPI(APIView):
 
 
 class UpdateDBAPI(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     def post(self, request):
         serializer = UpdateSerializer(data=request.data)
         serializer.is_valid()
