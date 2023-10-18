@@ -34,7 +34,6 @@ const AddComponents = () => {
                   <div className="col-6">
                   Add new element
                   </div>
-
               </div>
           </div>
           <div className="row my-3">

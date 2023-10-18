@@ -23,6 +23,12 @@ export interface TableData {
     show_components: OrderItem[];
 }
 
+export interface IntermediateComponent{
+    category: string;
+    comp_name: string;
+    amount: number;
+}
+
 export interface RootState {
     tableData: TableData;
     user: User | null;
@@ -34,6 +40,7 @@ type ActionTypes =
     | { type: 'SET_ORD_TABLE_DATA'; payload: OrderItem[] }
     | { type: 'SET_SHOW_DATA'; payload: OrderItem[] }
     | { type: 'ADD_ELEMENT_TO_DB'; payload: ReplacementChoice }
+    | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent}
     | { type: 'LOGIN'; payload: User } // Добавляем действие LOGIN
     | { type: 'LOGOUT' }; // Добавляем действие LOGOUT
 

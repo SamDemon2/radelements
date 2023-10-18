@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import {RootState, RadioComponent, OrderItem, ReplacementChoice} from "./reducers"; // Импортируем интерфейсы из reducers
+import {RootState, RadioComponent, OrderItem, ReplacementChoice, IntermediateComponent} from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
 
 // Указываем новые интерфейсы для параметров
@@ -87,12 +87,8 @@ export const fetchShowData = () => {
     };
 };
 
-// export const setIntermediateComp = (intercomps) => ({
-//     type: 'SET_INTERMEDIATE_COMPONENTS',
-//     payload: data,
-// });
-//
-// export const setIntermediateData = (data) => ({
-//    type: 'SET_INTERMEDIATE_DATA',
-//    payload: data,
-// });
+export const addIntermediateData = (intermediateData: IntermediateComponent) => ({
+    type: "ADD_INTERMEDIATE_DATA",
+    payload: intermediateData,
+});
+
