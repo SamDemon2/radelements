@@ -13,6 +13,12 @@ export interface OrderItem {
     amount_need: number;
 }
 
+export interface IntermediateComponent{
+    category: string;
+    comp_name: string;
+    amount: number;
+}
+
 export interface ReplacementChoice {
     replacement_choice: string;
 }
@@ -21,13 +27,10 @@ export interface TableData {
     components: (RadioComponent | ReplacementChoice)[];
     order_components: OrderItem[];
     show_components: OrderItem[];
+    inter_components: IntermediateComponent[];
 }
 
-export interface IntermediateComponent{
-    category: string;
-    comp_name: string;
-    amount: number;
-}
+
 
 export interface RootState {
     tableData: TableData;
@@ -49,6 +52,7 @@ const initialState: RootState = {
         components: [],
         order_components: [],
         show_components: [],
+        inter_components: [],
     },
     user: null,
 };
@@ -66,6 +70,17 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
             // Добавляем новый элемент в массив components
             const newComponents = [...state.tableData.components, action.payload];
             return { ...state, tableData: { ...state.tableData, components: newComponents } };
+        case 'ADD_INTERMEDIATE_DATA':
+            const newComponentData = action.payload;
+            const newComponent: IntermediateComponent = {
+                category: newComponentData.category,
+                comp_name: newComponentData.comp_name,
+                amount: newComponentData.amount,
+            };
+            const id = Date.now();
+            // Добавляем новый элемент в массив components
+            const updatedComponents = [...state.tableData.inter_components, { ...newComponent, id }];
+            return { ...state, tableData: { ...state.tableData, inter_components: updatedComponents } };
         case 'LOGIN':
             return { ...state, user: action.payload };
         case 'LOGOUT':
