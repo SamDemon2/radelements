@@ -29,17 +29,17 @@ const options = [
 
 const Dropdown = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const [subSelectedOption, setSubSelectedOption] = useState<string | null>(null);
+    // const [subSelectedOption, setSubSelectedOption] = useState<string | null>(null);
     const [formValue, setFormValue] = useState<string>('');
 
     const handleOptionSelect = (option: string) => {
         setSelectedOption(option);
-        setSubSelectedOption(null);
+        // setSubSelectedOption(null);
         setFormValue(option);
     };
 
     const handleSubOptionSelect = (subOption: string) => {
-        setSubSelectedOption(subOption);
+        // setSubSelectedOption(subOption);
         setFormValue(subOption);
     };
 
