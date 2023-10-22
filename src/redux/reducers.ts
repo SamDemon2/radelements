@@ -77,9 +77,8 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                 comp_name: newComponentData.comp_name,
                 amount: newComponentData.amount,
             };
-            const id = Date.now();
             // Добавляем новый элемент в массив components
-            const updatedComponents = [...state.tableData.inter_components, { ...newComponent, id }];
+            const updatedComponents = [...state.tableData.inter_components, newComponent];
             return { ...state, tableData: { ...state.tableData, inter_components: updatedComponents } };
         case 'LOGIN':
             return { ...state, user: action.payload };
