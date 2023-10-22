@@ -1,9 +1,10 @@
 import React from "react";
+import { RootState } from "../redux/store";
 import { useSelector } from "react-redux"; // Импортируем хук useSelector из 'react-redux'
 
 const IntermediateTable = () => {
     // Используем useSelector, чтобы получить данные из хранилища
-    const intermediateComponents = useSelector((state) => state.tableData.inter_components);
+    const intermediateComponents = useSelector((state:RootState) => state.tableData.tableData.inter_components);
 
     return (
         <table className="table table-dark table-striped table-bordered table-hover">
@@ -17,7 +18,7 @@ const IntermediateTable = () => {
             <tbody className="text-black">
             {intermediateComponents.map((component) => (
                 <tr key={component.category}>
-                    <td>{component.id}</td>
+                    <td>{component.category}</td>
                     <td>{component.comp_name}</td>
                     <td>{component.amount}</td>
                 </tr>
