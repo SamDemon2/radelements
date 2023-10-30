@@ -17,7 +17,7 @@ const IntermediateTable = () => {
             </thead>
             <tbody className="text-black">
             {intermediateComponents.map((component) => (
-                <tr key={component.category}>
+                <tr key={`${component.category}-${component.comp_name}`}>
                     <td>{component.category}</td>
                     <td>{component.comp_name}</td>
                     <td>{component.amount}</td>
