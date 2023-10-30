@@ -54,7 +54,7 @@ const Dropdown = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="selectedOption" className="form-label">
-                                Выбранный вариант:
+                                Chosen variant:
                             </label>
                             <input
                                 type="text"
@@ -76,7 +76,7 @@ const Dropdown = () => {
                             aria-haspopup="true"
                             aria-expanded="false"
                         >
-                            {selectedOption ? selectedOption : 'Выберите вариант'}
+                            {selectedOption ? selectedOption : 'Choose component'}
                         </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {options.map((option, index) => (
@@ -105,7 +105,7 @@ const Dropdown = () => {
                         </div>
                     </div>
                     <button type="submit" className="btn btn-primary mt-2">
-                        Отправить
+                        Submit
                     </button>
                 </div>
             </div>
