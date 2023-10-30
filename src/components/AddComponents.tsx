@@ -1,8 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import Dropdown from "./TrickyForm";
+import {useDispatch} from "react-redux";
+import {addIntermediateData} from "../redux/actions";
 import IntermediateTable from "./IntermediateTable";
 
 const AddComponents = () => {
+    const dispatch =useDispatch();
+    const [formData, setFormFata] = useState({
+        category: "",
+        comp_name: "",
+        amount: 0,
+    })
+    const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        setFormFata({
+            ...formData,
+            [name]: value,
+        });
+    };
+    const handleSubmit = (e:React.FormEvent) => {
+      e.preventDefault();
+      dispatch(addIntermediateData(formData));
+    };
     return <>
         <div className="ms-3 me-3">
             <div className="row my-3">
