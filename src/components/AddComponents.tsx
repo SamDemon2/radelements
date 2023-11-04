@@ -33,14 +33,17 @@ const AddComponents = () => {
                 <div className="col-2">
                     comp_category
                 </div>
-                <div className="col-6">
+                <div className="col-3">
                     {/*<Dropdown/>*/}
-                    <select className="form-select w-50" aria-label="Default select example">
+                    <select className="form-select w-100" aria-label="Default select example">
                         <option selected>Chose name</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
+                </div>
+                <div className='col-2'>
+
                 </div>
                 <div className="col-4">
                     <IntermediateTable/>
@@ -80,7 +83,7 @@ const AddComponents = () => {
                 </div>
                 <div className="col-3 d-flex justify-content-center">
                     <select className="form-select w-100" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
+                        <option selected>Chose category</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
