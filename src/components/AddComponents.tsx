@@ -31,13 +31,32 @@ const AddComponents = () => {
                     </div>
                 </div>
                 <div className="col-2">
-                    comp_name
+                    comp_category
                 </div>
                 <div className="col-6">
-                    <Dropdown/>
+                    {/*<Dropdown/>*/}
+                    <select className="form-select w-50" aria-label="Default select example">
+                        <option selected>Chose name</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
                 </div>
                 <div className="col-4">
                     <IntermediateTable/>
+                </div>
+            </div>
+            <div className="row my-3">
+                <div className="col-2">
+                    comp_name
+                </div>
+                <div className="col-3">
+                    <select className="form-select w-100">
+                        <option selected>Chose category</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
                 </div>
             </div>
             <div className="row my-3">
@@ -57,14 +76,6 @@ const AddComponents = () => {
             </div>
             <div className="row my-3">
                 <div className="col-2">
-                    Comp_name
-                </div>
-                <div className="col-3">
-                    <input className="w-100"/>
-                </div>
-            </div>
-            <div className="row my-3">
-                <div className="col-2">
                     Category
                 </div>
                 <div className="col-3 d-flex justify-content-center">
@@ -77,10 +88,19 @@ const AddComponents = () => {
                 </div>
             </div>
             <div className="row my-3">
+
+            <div className="col-2">
+                comp_name
+            </div>
+            <div className="col-3 d-flex justify-content-center">
+                <input className="w-100"/>
+            </div>
+            </div>
+            <div className="row my-3">
                 <div className="col-2">
                     Amount
                 </div>
-                <div className="col-3">
+                <div className="col-3 d-flex justify-content-center">
                     <input className="w-100"/>
                 </div>
                 <div className="row  my-3 d-flex justify-content-start">
