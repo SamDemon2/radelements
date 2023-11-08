@@ -198,11 +198,11 @@ const AddComponents = () => {
             </div>
             <div className="col-3 d-flex justify-content-center">
                 <input
-                    name="name"
+                    name="comp_name"
                     value={bottomFormData.comp_name}
                     onChange={handleBottomCompNameChange}
                     className="w-100"
-                    type="string"
+                    type="text"
                 />
             </div>
             </div>
