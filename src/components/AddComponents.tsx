@@ -1,55 +1,83 @@
 import React, {useState} from "react";
-import Dropdown from "./TrickyForm";
 import {useDispatch} from "react-redux";
 import {addIntermediateData} from "../redux/actions";
 import IntermediateTable from "./IntermediateTable";
 
 const AddComponents = () => {
     const dispatch =useDispatch();
-    const [formData, setFormData] = useState({
+    const [topFormData, setTopFormData] = useState({
         category: "",
         comp_name: "",
         amount: 0,
-    })
-    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    });
+
+    const [bottomFormData, setBottomFormData] = useState({
+        category: "",
+        comp_name: "",
+        amount: 0,
+    });
+
+    const handleTopCategoryChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setTopFormData({
+            ...topFormData,
             [name]: value,
         });
     };
 
-    const handleCompNameChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleTopCompNameChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setTopFormData({
+            ...topFormData,
             [name]: value,
         });
     };
 
-    const handleCompINameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleTopAmountChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setTopFormData({
+            ...topFormData,
             [name]: value,
         });
     };
 
-    const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleBottomCategoryChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setBottomFormData({
+            ...bottomFormData,
             [name]: value,
         });
     };
 
-    const handleSubmit = (e:React.FormEvent) => {
-      e.preventDefault();
-      dispatch(addIntermediateData(formData));
+    const handleBottomCompNameChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setBottomFormData({
+            ...bottomFormData,
+            [name]: value,
+        });
+    };
+
+    const handleBottomAmountChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setBottomFormData({
+            ...bottomFormData,
+            [name]: value,
+        });
+    };
+
+    const handleTopSubmit = (e:React.FormEvent) => {
+        e.preventDefault();
+        dispatch(addIntermediateData(topFormData));
+    };
+
+    const handleBottomSubmit = (e:React.FormEvent) => {
+        e.preventDefault();
+        dispatch(addIntermediateData(bottomFormData));
     };
     return <>
-        <form onSubmit={handleSubmit}>
+
         <div className="ms-3 me-3">
+            <form onSubmit={handleTopSubmit}>
             <div className="row my-3">
                 <div className="row my-3 bold-text d-flex justify-content-start">
                     <div className="col-6">
@@ -60,10 +88,9 @@ const AddComponents = () => {
                     comp_category
                 </div>
                 <div className="col-3">
-                    {/*<Dropdown/>*/}
                     <select  name="category"
-                             value={formData.category}
-                             onChange={handleCategoryChange}
+                             value={topFormData.category}
+                             onChange={handleTopCategoryChange}
                              className="form-select w-100" aria-label="Default select example">
                         <option selected>Chose category</option>
                         <option value="Resistor">Resistor</option>
@@ -81,14 +108,15 @@ const AddComponents = () => {
                     <IntermediateTable/>
                 </div>
             </div>
+
             <div className="row my-3">
                 <div className="col-2">
                     comp_name
                 </div>
                 <div className="col-3">
                     <select  name="comp_name"
-                             value={formData.comp_name}
-                             onChange={handleCompNameChange}
+                             value={topFormData.comp_name}
+                             onChange={handleTopCompNameChange}
                              className="form-select w-100">
                         <option selected>Chose name</option>
                         <option value="Resistor 395 Ohms">Resistor 395 Ohms</option>
@@ -109,6 +137,8 @@ const AddComponents = () => {
                     </select>
                 </div>
             </div>
+            </form>
+            <form onSubmit={handleBottomSubmit}>
             <div className="row my-3">
                 <div className="col-2">
                     amount_add
@@ -116,8 +146,8 @@ const AddComponents = () => {
                 <div className="col-3 d-flex justify-content-center">
                     <input
                         name="amount"
-                        value={formData.amount}
-                        onChange={handleAmountChange}
+                        value={topFormData.amount}
+                        onChange={handleTopAmountChange}
                         className="w-100"
                     type="number"/>
                 </div>
@@ -132,6 +162,7 @@ const AddComponents = () => {
                      </button>
                 </div>
             </div>
+
             <div className="row my-4">
                 <div className="row my-3 bold-text d-flex justify-content-start">
                     <div className="col-6">
@@ -146,8 +177,8 @@ const AddComponents = () => {
                 <div className="col-3 d-flex justify-content-center">
                     <select
                         name="category"
-                        value={formData.category}
-                        onChange={handleCategoryChange}
+                        value={bottomFormData.category}
+                        onChange={handleBottomCategoryChange}
                         className="form-select w-100" aria-label="Default select example">
                         <option selected>Chose category</option>
                         <option value="1">Resistor</option>
@@ -167,8 +198,8 @@ const AddComponents = () => {
             <div className="col-3 d-flex justify-content-center">
                 <input
                     name="name"
-                    value={formData.comp_name}
-                    onChange={handleCompINameChange}
+                    value={bottomFormData.comp_name}
+                    onChange={handleBottomCompNameChange}
                     className="w-100"
                     type="string"
                 />
@@ -181,8 +212,8 @@ const AddComponents = () => {
                 <div className="col-3 d-flex justify-content-center">
                     <input
                         name="amount"
-                        value={formData.amount}
-                        onChange={handleAmountChange}
+                        value={bottomFormData.amount}
+                        onChange={handleBottomAmountChange}
                         className="w-100"
                         type="number"
                     />
@@ -204,8 +235,8 @@ const AddComponents = () => {
                     </div>
                 </div>
             </div>
+            </form>
         </div>
-        </form>
     </>;
 };
 export default AddComponents;
