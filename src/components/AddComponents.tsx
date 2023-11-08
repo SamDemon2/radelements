@@ -137,8 +137,8 @@ const AddComponents = () => {
                     </select>
                 </div>
             </div>
-            </form>
-            <form onSubmit={handleBottomSubmit}>
+
+
             <div className="row my-3">
                 <div className="col-2">
                     amount_add
@@ -162,7 +162,7 @@ const AddComponents = () => {
                      </button>
                 </div>
             </div>
-
+            </form>
             <div className="row my-4">
                 <div className="row my-3 bold-text d-flex justify-content-start">
                     <div className="col-6">
@@ -170,6 +170,7 @@ const AddComponents = () => {
                     </div>
                 </div>
             </div>
+            <form onSubmit={handleBottomSubmit}>
             <div className="row my-3">
                 <div className="col-2">
                     Category
@@ -181,12 +182,12 @@ const AddComponents = () => {
                         onChange={handleBottomCategoryChange}
                         className="form-select w-100" aria-label="Default select example">
                         <option selected>Chose category</option>
-                        <option value="1">Resistor</option>
-                        <option value="2">Capacitor</option>
-                        <option value="3">NPN Transistor</option>
-                        <option value="4">LED</option>
-                        <option value="5">Relay</option>
-                        <option value="6">Piezoelectric Buzzer</option>
+                        <option value="Resistor">Resistor</option>
+                        <option value="Capacitor">Capacitor</option>
+                        <option value="NPN Transistor">NPN Transistor</option>
+                        <option value="LED">LED</option>
+                        <option value="Relay">Relay</option>
+                        <option value="Piezoelectric Buzzer">Piezoelectric Buzzer</option>
                     </select>
                 </div>
             </div>
