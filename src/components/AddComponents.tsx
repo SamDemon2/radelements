@@ -27,6 +27,14 @@ const AddComponents = () => {
         });
     };
 
+    const handleCompINameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
     const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({
@@ -106,7 +114,12 @@ const AddComponents = () => {
                     amount_add
                 </div>
                 <div className="col-3 d-flex justify-content-center">
-                    <input className="w-100"/>
+                    <input
+                        name="amount"
+                        value={formData.amount}
+                        onChange={handleAmountChange}
+                        className="w-100"
+                    type="number"/>
                 </div>
             </div>
             <div className="row my-3">
@@ -131,7 +144,11 @@ const AddComponents = () => {
                     Category
                 </div>
                 <div className="col-3 d-flex justify-content-center">
-                    <select className="form-select w-100" aria-label="Default select example">
+                    <select
+                        name="category"
+                        value={formData.category}
+                        onChange={handleCategoryChange}
+                        className="form-select w-100" aria-label="Default select example">
                         <option selected>Chose category</option>
                         <option value="1">Resistor</option>
                         <option value="2">Capacitor</option>
@@ -148,7 +165,13 @@ const AddComponents = () => {
                 comp_name
             </div>
             <div className="col-3 d-flex justify-content-center">
-                <input className="w-100"/>
+                <input
+                    name="name"
+                    value={formData.comp_name}
+                    onChange={handleCompINameChange}
+                    className="w-100"
+                    type="string"
+                />
             </div>
             </div>
             <div className="row my-3">
@@ -156,7 +179,13 @@ const AddComponents = () => {
                     Amount
                 </div>
                 <div className="col-3 d-flex justify-content-center">
-                    <input className="w-100"/>
+                    <input
+                        name="amount"
+                        value={formData.amount}
+                        onChange={handleAmountChange}
+                        className="w-100"
+                        type="number"
+                    />
                 </div>
                 <div className="row  my-3 d-flex justify-content-start">
                     <div className="col-2">
