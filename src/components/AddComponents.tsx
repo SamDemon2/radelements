@@ -239,7 +239,7 @@ const AddComponents = () => {
             </div>
             </form>
                 </div>
-                <div className="col-4">
+                <div className="col-4 my-4">
                     <IntermediateTable/>
                 </div>
             </div>
