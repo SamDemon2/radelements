@@ -75,19 +75,20 @@ const AddComponents = () => {
         dispatch(addIntermediateData(bottomFormData));
     };
     return <>
-
         <div className="ms-3 me-3">
+            <div className="row">
+                <div className="col-7">
             <form onSubmit={handleTopSubmit}>
             <div className="row my-3">
                 <div className="row my-3 bold-text d-flex justify-content-start">
-                    <div className="col-6">
+                    <div className="col-8">
                         Add current comp
                     </div>
                 </div>
-                <div className="col-2">
+                <div className="col-3">
                     comp_category
                 </div>
-                <div className="col-3">
+                <div className="col-5">
                     <select  name="category"
                              value={topFormData.category}
                              onChange={handleTopCategoryChange}
@@ -101,19 +102,19 @@ const AddComponents = () => {
                         <option value="Piezoelectric Buzzer">Piezoelectric Buzzer</option>
                     </select>
                 </div>
-                <div className='col-2'>
+                {/*<div className='col-2'>*/}
 
-                </div>
-                <div className="col-4">
-                    <IntermediateTable/>
-                </div>
+                {/*</div>*/}
+                {/*<div className="col-4">*/}
+                {/*    <IntermediateTable/>*/}
+                {/*</div>*/}
             </div>
 
             <div className="row my-3">
-                <div className="col-2">
+                <div className="col-3">
                     comp_name
                 </div>
-                <div className="col-3">
+                <div className="col-5">
                     <select  name="comp_name"
                              value={topFormData.comp_name}
                              onChange={handleTopCompNameChange}
@@ -140,10 +141,10 @@ const AddComponents = () => {
 
 
             <div className="row my-3">
-                <div className="col-2">
+                <div className="col-3">
                     amount_add
                 </div>
-                <div className="col-3 d-flex justify-content-center">
+                <div className="col-5 d-flex justify-content-center">
                     <input
                         name="amount"
                         value={topFormData.amount}
@@ -153,7 +154,7 @@ const AddComponents = () => {
                 </div>
             </div>
             <div className="row my-3">
-                <div className="col-3">
+                <div className="col-5">
 
                 </div>
                 <div className="col-1">
@@ -165,17 +166,17 @@ const AddComponents = () => {
             </form>
             <div className="row my-4">
                 <div className="row my-3 bold-text d-flex justify-content-start">
-                    <div className="col-6">
+                    <div className="col-8">
                         Add new element
                     </div>
                 </div>
             </div>
             <form onSubmit={handleBottomSubmit}>
             <div className="row my-3">
-                <div className="col-2">
+                <div className="col-3">
                     Category
                 </div>
-                <div className="col-3 d-flex justify-content-center">
+                <div className="col-5 d-flex justify-content-center">
                     <select
                         name="category"
                         value={bottomFormData.category}
@@ -193,10 +194,10 @@ const AddComponents = () => {
             </div>
             <div className="row my-3">
 
-            <div className="col-2">
+            <div className="col-3">
                 comp_name
             </div>
-            <div className="col-3 d-flex justify-content-center">
+            <div className="col-5 d-flex justify-content-center">
                 <input
                     name="comp_name"
                     value={bottomFormData.comp_name}
@@ -207,10 +208,10 @@ const AddComponents = () => {
             </div>
             </div>
             <div className="row my-3">
-                <div className="col-2">
+                <div className="col-3">
                     Amount
                 </div>
-                <div className="col-3 d-flex justify-content-center">
+                <div className="col-5 d-flex justify-content-center">
                     <input
                         name="amount"
                         value={bottomFormData.amount}
@@ -220,7 +221,7 @@ const AddComponents = () => {
                     />
                 </div>
                 <div className="row  my-3 d-flex justify-content-start">
-                    <div className="col-2">
+                    <div className="col-4">
 
                     </div>
                     <div className="col-1 d-flex justify-content-end">
@@ -229,7 +230,7 @@ const AddComponents = () => {
                         </button>
                     </div>
                     <div className="col-1"></div>
-                    <div className="col-1 d-flex justify-content-start">
+                    <div className="col-2 d-flex justify-content-start">
                         <button className=" btn btn-primary">
                             Add over
                         </button>
@@ -237,6 +238,11 @@ const AddComponents = () => {
                 </div>
             </div>
             </form>
+                </div>
+                <div className="col-4">
+                    <IntermediateTable/>
+                </div>
+            </div>
         </div>
     </>;
 };
