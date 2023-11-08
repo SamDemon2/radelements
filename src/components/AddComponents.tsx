@@ -70,6 +70,16 @@ const AddComponents = () => {
                     <input className="w-100"/>
                 </div>
             </div>
+            <div className="row my-3">
+                <div className="col-3">
+
+                </div>
+                <div className="col-1">
+                    <button className="btn btn-primary">
+                        Submit
+                     </button>
+                </div>
+            </div>
             <div className="row my-4">
                 <div className="row my-3 bold-text d-flex justify-content-start">
                     <div className="col-6">
