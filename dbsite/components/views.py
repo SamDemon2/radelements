@@ -41,6 +41,10 @@ def index(request):
 
 class DeviceAPI(APIView):
     # permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        values = Devices.objects.values_list("device_name", flat=True)
+        print(values)
+        return Response({"device_names": values})
     def post(self, request):
         comp_ids = []
         amount_need = []
@@ -139,6 +143,10 @@ class ReplaceAPI(APIView):
 
 class UpdateDBAPI(APIView):
     # permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        values = Components.objects.values_list("comp_name", flat=True)
+        print(values)
+        return Response({"comp_names": values})
     def post(self, request):
         serializer = UpdateSerializer(data=request.data)
         serializer.is_valid()
