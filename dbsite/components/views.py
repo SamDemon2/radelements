@@ -130,6 +130,10 @@ class ShowOrderAPI(APIView):
 
 class ReplaceAPI(APIView):
     # permission_classes = (IsAuthenticated, )
+    def get(self, request):
+        comps_to_replace = Replace.objects.all().values_list("comp_name", flat=True)
+        return Response({"status": 200, "data": comps_to_replace})
+
     def post(self, request):
         serializer = ReplaceSerializer(data=request.data)
         serializer.is_valid()
@@ -146,6 +150,7 @@ class UpdateDBAPI(APIView):
         values = Components.objects.values_list("comp_name", flat=True)
         print(values)
         return Response({"comp_names": values})
+
     def post(self, request):
         serializer = UpdateSerializer(data=request.data)
         serializer.is_valid()
