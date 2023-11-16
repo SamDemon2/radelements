@@ -8,9 +8,9 @@ urlpatterns = [
     path("api/v1/show/", ShowOrderAPI.as_view(), name="show"),
     path("api/v1/replace/", ReplaceAPI.as_view(), name="replace"),
     path("api/v1/update/", UpdateDBAPI.as_view(), name="update"),
-    path("api/v1/drf_auth/", include("rest_framework.urls")),
-    path("api/v1/auth/", include("djoser.urls")),
-    re_path(r"^auth/", include("djoser.urls.authtoken")),
+    # path("api/v1/drf_auth/", include("rest_framework.urls")),
+    # path("api/v1/auth/", include("djoser.urls")),
+    # re_path(r"^auth/", include("djoser.urls.authtoken")),
 ]
 
 urlpatterns += doc_urls

@@ -43,7 +43,6 @@ class DeviceAPI(APIView):
     # permission_classes = (IsAuthenticated,)
     def get(self, request):
         values = Devices.objects.values_list("device_name", flat=True)
-        print(values)
         return Response({"device_names": values})
     def post(self, request):
         comp_ids = []
