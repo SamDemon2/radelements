@@ -10,7 +10,7 @@ urlpatterns = [
     path("api/v1/update/", UpdateDBAPI.as_view(), name="update"),
     # path("api/v1/drf_auth/", include("rest_framework.urls")),
     # path("api/v1/auth/", include("djoser.urls")),
-    # re_path(r"^auth/", include("djoser.urls.authtoken")),
+    # re_path(r"^auth/", include("djoser.urls.authtoken")),#opopooppppo
 ]
 
 urlpatterns += doc_urls
