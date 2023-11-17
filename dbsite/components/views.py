@@ -119,7 +119,9 @@ class ShowOrderAPI(APIView):
                     comp_for_rep = cur.fetchall()
                     for c in comp_for_rep:
                         cur.execute(f"INSERT INTO components_replace( comp_name, cat) VALUES(?, ?)", (c[0], cat_rep))
-                    return redirect("replace" + "/1")
+                    # return redirect("replace" + "/1")
+                    return redirect("replace")
+
             count = 0
             for comp in comp_name:
                 new_amount = in_stock[count] - amount_need[count]
@@ -162,7 +164,11 @@ class UpdateDBAPI(APIView):
                 new_amount = component.amount + amount_add
                 Components.objects.filter(comp_name=comp_name).update(amount=new_amount)
             except:
-                component = Category.objects.get(cat_name=comp["category"])
+                try:
+                    component = Category.objects.get(cat_name=comp["category"])
+                except:
+                    Category.objects.create(cat_name=comp["category"])
+                    component = Category.objects.get(cat_name=comp["category"])
                 category = component.cat_id
                 Components.objects.create(comp_name=comp["new_comp_name"], cat=category, amount=comp["amount_add"])
 
