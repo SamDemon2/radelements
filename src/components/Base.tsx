@@ -1,40 +1,78 @@
-import React from "react";
-//Device
-const Base = () => {
-    return <>
-        <div className="ms-3 me-3">
-           <div className="row my-3">
-            <div className="col-md-2 d-flex">
-                <span> Select device name</span>
-            </div>
-            <div className="col-md-3">
-        <select className="form-select w-100" aria-label="Default select example">
-            <option selected>Select device name</option>
-            <option value="1">Device_1</option>
-            <option value="2">Device_2</option>
-            <option value="3">Device_3</option>
-            <option value="4">Device_4</option>
-            <option value="5">Device_5</option>
-            <option value="6">Device_6</option>
-            <option value="7">Device_7</option>
-        </select>
-            </div>
-        </div>
-       <div className="row my-3">
-           <div className="col-md-2 d-flex">
-               <span> Select amount</span>
-           </div>
-           <div className="col-md-3">
-               <input className="form-control w-100"/>
-           </div>
-       </div>
-        <div className="row my-3">
-            <div className="col-md-2 d-flex justify-content-start">
-            <button type="submit" className="btn btn-primary">Submit</button>
-            </div>
-        </div>
-        </div>
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import axios from "axios";
 
-    </>
-}
+const Base = () => {
+    const [deviceNames, setDeviceNames] = useState<string[]>([]);
+    const [selectedDevice, setSelectedDevice] = useState<string>("");
+    const [amount, setAmount] = useState<string>("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
+                setDeviceNames(response.data.device_names);
+            } catch (error) {
+                console.error('Error fetching device names:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleDeviceChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedDevice(e.target.value);
+    };
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        // Ваша логика для обработки данных при отправке формы
+    };
+
+    return (
+        <div className="ms-3 me-3">
+            <form onSubmit={handleSubmit}>
+                <div className="row my-3">
+                    <div className="col-md-2 d-flex">
+                        <span>Select device name</span>
+                    </div>
+                    <div className="col-md-3">
+                        <select
+                            className="form-select w-100"
+                            aria-label="Default select example"
+                            value={selectedDevice}
+                            onChange={handleDeviceChange}
+                        >
+                            <option value="" disabled>Select device name</option>
+                            {deviceNames.map((device, index) => (
+                                <option key={index} value={device}>
+                                    {device}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                <div className="row my-3">
+                    <div className="col-md-2 d-flex">
+                        <span>Select amount</span>
+                    </div>
+                    <div className="col-md-3">
+                        <input
+                            className="form-control w-100"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className="row my-3">
+                    <div className="col-md-2 d-flex justify-content-start">
+                        <button type="submit" className="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    );
+};
+
 export default Base;
