@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import {RootState, RadioComponent, OrderItem, ReplacementChoice, IntermediateComponent} from "./reducers"; // Импортируем интерфейсы из reducers
+import {RootState, RadioComponent, OrderItem, ReplacementChoice, IntermediateComponent, Device} from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
 
 // Указываем новые интерфейсы для параметров
@@ -92,3 +92,7 @@ export const addIntermediateData = (intermediateData: IntermediateComponent) => 
     payload: intermediateData,
 });
 
+export const getDevice = (data: Device[]) => ({
+    type:"ADD_DEVICE_NAME",
+    payload: data,
+});

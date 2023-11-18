@@ -23,11 +23,16 @@ export interface ReplacementChoice {
     replacement_choice: string;
 }
 
+export interface Device {
+    name: string;
+}
+
 export interface TableData {
     components: (RadioComponent | ReplacementChoice)[];
     order_components: OrderItem[];
     show_components: OrderItem[];
     inter_components: IntermediateComponent[];
+    device_components: Device[];
 }
 
 
@@ -44,6 +49,7 @@ type ActionTypes =
     | { type: 'SET_SHOW_DATA'; payload: OrderItem[] }
     | { type: 'ADD_ELEMENT_TO_DB'; payload: ReplacementChoice }
     | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent}
+    | { type: 'ADD_DEVICE_NAME'; payload: Device}
     | { type: 'LOGIN'; payload: User } // Добавляем действие LOGIN
     | { type: 'LOGOUT' }; // Добавляем действие LOGOUT
 
@@ -53,6 +59,7 @@ const initialState: RootState = {
         order_components: [],
         show_components: [],
         inter_components: [],
+        device_components: [],
     },
     user: null,
 };
@@ -80,6 +87,7 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
             // Добавляем новый элемент в массив components
             const updatedComponents = [...state.tableData.inter_components, newComponent];
             return { ...state, tableData: { ...state.tableData, inter_components: updatedComponents } };
+
         case 'LOGIN':
             return { ...state, user: action.payload };
         case 'LOGOUT':
