@@ -13,10 +13,10 @@ const Base = () => {
             <option value="1">Device_1</option>
             <option value="2">Device_2</option>
             <option value="3">Device_3</option>
-            <option value="3">Device_4</option>
-            <option value="1">Device_5</option>
-            <option value="2">Device_6</option>
-            <option value="3">Device_7</option>
+            <option value="4">Device_4</option>
+            <option value="5">Device_5</option>
+            <option value="6">Device_6</option>
+            <option value="7">Device_7</option>
         </select>
             </div>
         </div>
