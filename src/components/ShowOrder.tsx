@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { fetchShowData } from "../redux/actions";
+import {Link} from "react-router-dom";
 
 interface OrderItem {
   component: string;
@@ -46,7 +47,7 @@ const ShowOrder: React.FC = () => {
           </table>
           <div className="">
             <button type="submit" className="btn btn-primary">
-              Submit
+              <Link to={"/my-table"} style={{ textDecoration: 'none', color: 'white' }}> Submit </Link>
             </button>
           </div>
         </div>
