@@ -1,23 +1,20 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import axios from "axios";
+import {useDispatch, useSelector} from 'react-redux';
+import { RootState } from '../redux/reducers';
+import { fetchDeviceNames } from '../redux/actions';
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 
 const Base = () => {
-    const [deviceNames, setDeviceNames] = useState<string[]>([]);
+    const dispatch = useDispatch();
+    const deviceNames = useSelector((state: RootState) => {
+        console.log('Memoized selector called');
+        return state.deviceNames.device_names || [];
+    }, (prev, curr) => prev.join() === curr.join()); // Мемоизация селектора
     const [selectedDevice, setSelectedDevice] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
-                setDeviceNames(response.data.device_names);
-            } catch (error) {
-                console.error('Error fetching device names:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
+        dispatch(fetchDeviceNames() as any);
+    }, [dispatch]);
 
     const handleDeviceChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setSelectedDevice(e.target.value);
@@ -28,7 +25,7 @@ const Base = () => {
         // Ваша логика для обработки данных при отправке формы
     };
 
-    return (
+    return <>
         <div className="ms-3 me-3">
             <form onSubmit={handleSubmit}>
                 <div className="row my-3">
@@ -72,7 +69,7 @@ const Base = () => {
                 </div>
             </form>
         </div>
-    );
+    </>;
 };
 
 export default Base;

@@ -1,5 +1,12 @@
 import { Dispatch } from "redux";
-import {RootState, RadioComponent, OrderItem, ReplacementChoice, IntermediateComponent, Device} from "./reducers"; // Импортируем интерфейсы из reducers
+import {
+    RootState,
+    RadioComponent,
+    OrderItem,
+    ReplacementChoice,
+    IntermediateComponent,
+    DeviceNamesState
+} from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
 
 // Указываем новые интерфейсы для параметров
@@ -92,7 +99,19 @@ export const addIntermediateData = (intermediateData: IntermediateComponent) => 
     payload: intermediateData,
 });
 
-export const getDevice = (data: Device[]) => ({
-    type:"ADD_DEVICE_NAME",
-    payload: data,
+export const setDeviceNames = (names: string[]) => ({
+   type: "SET_DEVICE_NAMES",
+    payload: [...names],
 });
+
+export const fetchDeviceNames = () => {
+  return async (dispatch: Dispatch) => {
+      try {
+          const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
+          const deviceNames = response.data.device_names;
+          dispatch(setDeviceNames(deviceNames));
+      } catch (error) {
+          console.error('Error fetching device names:', error);
+      }
+  };
+};
