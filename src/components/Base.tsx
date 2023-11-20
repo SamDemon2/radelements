@@ -3,6 +3,7 @@ import { RootState } from '../redux/reducers';
 import { fetchDeviceNames } from '../redux/actions';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
+
 const Base = () => {
     const dispatch = useDispatch();
     const reduxTableData = useSelector((state: RootState) => state.tableData);
