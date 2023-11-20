@@ -32,11 +32,11 @@ export interface TableData {
     order_components: OrderItem[];
     show_components: OrderItem[];
     inter_components: IntermediateComponent[];
+    device_components: DeviceNamesState [];
 }
 
 export interface RootState {
     tableData: TableData;
-    deviceNames: DeviceNamesState;
     user: User | null;
 }
 
@@ -46,7 +46,7 @@ type ActionTypes =
     | { type: 'SET_SHOW_DATA'; payload: OrderItem[] }
     | { type: 'ADD_ELEMENT_TO_DB'; payload: ReplacementChoice }
     | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent }
-    | { type: 'SET_DEVICE_NAMES'; payload: string[] }
+    | { type: 'SET_DEVICE_NAMES'; payload: DeviceNamesState[] }
     | { type: 'LOGIN'; payload: User }
     | { type: 'LOGOUT' };
 
@@ -56,11 +56,9 @@ const initialState: RootState = {
         order_components: [],
         show_components: [],
         inter_components: [],
+        device_components: [],
     },
-    deviceNames: {
-        device_names: [],
-    },
-    user: null,
+        user: null,
 };
 
 const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, action) => {
@@ -84,7 +82,7 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
             const updatedComponents = [...state.tableData.inter_components, newComponent];
             return { ...state, tableData: { ...state.tableData, inter_components: updatedComponents } };
         case 'SET_DEVICE_NAMES':
-            return { ...state, deviceNames: { device_names: [...action.payload] } };
+            return { ...state, tableData: { ...state.tableData, device_components: action.payload  } };
         case 'LOGIN':
             return { ...state, user: action.payload };
         case 'LOGOUT':

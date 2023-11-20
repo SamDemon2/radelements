@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 
 const combinedReducer = combineReducers({
     tableData: rootReducer,
-    deviceNames: rootReducer,
 });
 
 const store = configureStore({

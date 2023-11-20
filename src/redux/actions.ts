@@ -8,6 +8,8 @@ import {
     DeviceNamesState
 } from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
 
 // Указываем новые интерфейсы для параметров
 export const setTableData = (data: RadioComponent[]) => ({
@@ -99,19 +101,21 @@ export const addIntermediateData = (intermediateData: IntermediateComponent) => 
     payload: intermediateData,
 });
 
-export const setDeviceNames = (names: string[]) => ({
+export const setDeviceNames = (data: DeviceNamesState) => ({
    type: "SET_DEVICE_NAMES",
-    payload: [...names],
+    payload: data,
 });
 
-export const fetchDeviceNames = () => {
-  return async (dispatch: Dispatch) => {
-      try {
-          const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
-          const deviceNames = response.data.device_names;
-          dispatch(setDeviceNames(deviceNames));
-      } catch (error) {
-          console.error('Error fetching device names:', error);
-      }
-  };
-};
+export const fetchDeviceNames = createAsyncThunk(
+    'deviceNames/fetchDeviceNames',
+    async (_, { dispatch }) => {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/v1/add/');
+            const data = await response.json();
+            const deviceNames = data.device_names;
+            dispatch(setDeviceNames(deviceNames));
+        } catch (error) {
+            console.error('Error fetching device names:', error);
+        }
+    }
+);
