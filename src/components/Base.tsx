@@ -3,7 +3,6 @@ import { RootState } from '../redux/reducers';
 import { fetchDeviceNames } from '../redux/actions';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
-
 const Base = () => {
     const dispatch = useDispatch();
     const reduxTableData = useSelector((state: RootState) => state.tableData);
@@ -12,6 +11,7 @@ const Base = () => {
     const [amount, setAmount] = useState<string>('');
 
     useEffect(() => {
+        // Вызываем fetchDeviceNames при монтировании компонента
         dispatch(fetchDeviceNames() as any);
     }, [dispatch]);
 
@@ -23,6 +23,9 @@ const Base = () => {
         e.preventDefault();
         // Ваша логика для обработки данных при отправке формы
     };
+
+    // Проверяем наличие reduxTableData перед использованием
+    const deviceNames = reduxTableData?.device_components?.device_names || [];
 
     return (
         <>
@@ -39,17 +42,15 @@ const Base = () => {
                                 value={selectedDevice}
                                 onChange={handleDeviceChange}
                             >
-                                {reduxTableData ? (
-                                    <>
-                                        <option value="" disabled>
-                                            Select device name
+                                <option value="" disabled>
+                                    Select device name
+                                </option>
+                                {deviceNames.length > 0 ? (
+                                    deviceNames.map((item: string) => (
+                                        <option key={item} value={item}>
+                                            {item}
                                         </option>
-                                        {reduxTableData.device_components.map((item) => (
-                                            <option  value={item.device_names}>
-                                                {item.device_names}
-                                            </option>
-                                        ))}
-                                    </>
+                                    ))
                                 ) : (
                                     <option value="" disabled>
                                         No device names available
