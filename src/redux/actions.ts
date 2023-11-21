@@ -109,13 +109,15 @@ export const setDeviceNames = (deviceNames: string[]) => ({
 export const fetchDeviceNames = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get('http://localhost:8000/api/v1/device_names/');
+            const response = await axios.get<{ device_names: string[] }>('http://127.0.0.1:8000/api/v1/add/');
             const deviceNames = response.data.device_names;
+            console.log('Device names from the server:', deviceNames);
             dispatch(setDeviceNames(deviceNames));
         } catch (error) {
             console.error('Ошибка при получении имен устройств:', error);
         }
     };
 };
+
 
 

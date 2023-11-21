@@ -1,7 +1,7 @@
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/reducers';
 import { fetchDeviceNames } from '../redux/actions';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 const Base = () => {
     const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const Base = () => {
         // Ваша логика для обработки данных при отправке формы
     };
 
-    // Проверяем наличие reduxTableData перед использованием
+    // Проверяем наличие reduxTableData и его свойств перед использованием
     const deviceNames = reduxTableData?.device_components?.device_names || [];
 
     return (
@@ -42,11 +42,9 @@ const Base = () => {
                                 value={selectedDevice}
                                 onChange={handleDeviceChange}
                             >
-                                <option value="" disabled>
-                                    Select device name
-                                </option>
+                                <option value="" disabled>Select device name</option>
                                 {deviceNames.length > 0 ? (
-                                    deviceNames.map((item: string) => (
+                                    deviceNames.map((item) => (
                                         <option key={item} value={item}>
                                             {item}
                                         </option>
