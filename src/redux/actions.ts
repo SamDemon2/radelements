@@ -120,4 +120,23 @@ export const fetchDeviceNames = () => {
 };
 
 
+export const fetchElementChoices = createAsyncThunk(
+    'FETCH_ELEMENT_CHOICES',
+    async (_, { dispatch }) => {
+        try {
+            const response = await axios.get<{ data: string[] }>(
+                'http://127.0.0.1:8000/api/v1/replace/'
+            );
+            const elementChoices = response.data.data;
+            dispatch(setElementChoices(elementChoices));
+        } catch (error) {
+            console.error('Error fetching element choices:', error);
+        }
+    }
+);
+
+export const setElementChoices = (elementChoices: string[]) => ({
+    type: 'SET_ELEMENT_CHOICES',
+    payload: elementChoices,
+});
 

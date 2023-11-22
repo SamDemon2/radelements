@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import { sendElementToServer } from "../redux/actions";
-import { useDispatch } from "react-redux";
-import {ReplacementChoice} from "../redux/reducers";
+import React, { useState, useEffect } from 'react';
+import { sendElementToServer, fetchElementChoices } from '../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReplacementChoice, RootState } from '../redux/reducers';
 
 const Replace = () => {
-    const [selectedElement, setSelectedElement] = useState("");
+    const [selectedElement, setSelectedElement] = useState('');
     const dispatch = useDispatch();
+    const elementChoices = useSelector((state: RootState) => state.elementChoices);
+
+    useEffect(() => {
+        // Вызываем fetchElementChoices при монтировании компонента
+        dispatch(fetchElementChoices() as any);
+    }, [dispatch]);
 
     const handleElementChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedElement(event.target.value);
@@ -13,11 +19,12 @@ const Replace = () => {
 
     const handleAddToDatabase = () => {
         if (selectedElement) {
-            const replacementChoice: ReplacementChoice = { replacement_choice: selectedElement };
+            const replacementChoice: ReplacementChoice = {
+                replacement_choice: selectedElement,
+            };
             dispatch(sendElementToServer(replacementChoice) as any).then(() => {
-                setSelectedElement("");
+                setSelectedElement('');
             });
-
         }
     };
 
@@ -33,13 +40,11 @@ const Replace = () => {
                         onChange={handleElementChange}
                     >
                         <option value="">--------</option>
-                        <option value="Element_1">Element_1</option>
-                        <option value="Element_2">Element_2</option>
-                        <option value="Element_3">Element_3</option>
-                        <option value="Element_4">Element_4</option>
-                        <option value="Element_5">Element_5</option>
-                        <option value="Element_6">Element_6</option>
-                        <option value="Element_7">Element_7</option>
+                        {elementChoices && elementChoices.map((choice) => (
+                            <option key={choice} value={choice}>
+                                {choice}
+                            </option>
+                        ))}
                     </select>
                     <div className="d-grid">
                         <button
