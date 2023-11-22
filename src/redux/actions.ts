@@ -121,7 +121,7 @@ export const fetchDeviceNames = () => {
 
 
 export const fetchElementChoices = createAsyncThunk(
-    'FETCH_ELEMENT_CHOICES',
+    'SET_ELEMENT_CHOICES',
     async (_, { dispatch }) => {
         try {
             const response = await axios.get<{ data: string[] }>(

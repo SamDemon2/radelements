@@ -10,13 +10,13 @@ type TableDataElementChoicesActionTypes =
     | { type: 'SET_ELEMENT_CHOICES'; payload: string[] };
 
 // Начальное состояние
-const initialState: TableDataElementChoicesState = {
+const initialTableDataElementChoicesState: TableDataElementChoicesState = {
     elementChoices: [],
 };
 
 // Редюсер для нового состояния
 const tableDataElementChoicesReducer: Reducer<TableDataElementChoicesState, TableDataElementChoicesActionTypes> = (
-    state = initialState,
+    state = initialTableDataElementChoicesState,
     action
 ) => {
     switch (action.type) {

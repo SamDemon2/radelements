@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { sendElementToServer, fetchElementChoices } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReplacementChoice, RootState } from '../redux/reducers';
+import { ReplacementChoice } from '../redux/reducers';
+import {TableDataElementChoicesState} from "../redux/listreducers";
 
 const Replace = () => {
     const [selectedElement, setSelectedElement] = useState('');
     const dispatch = useDispatch();
-    const elementChoices = useSelector((state: RootState) => state.elementChoices);
+
+    // Обновленное использование нового состояния
+    const elementChoices = useSelector((state: TableDataElementChoicesState) => state.elementChoices);
 
     useEffect(() => {
         // Вызываем fetchElementChoices при монтировании компонента
@@ -40,9 +43,9 @@ const Replace = () => {
                         onChange={handleElementChange}
                     >
                         <option value="">--------</option>
-                        {elementChoices && elementChoices.map((choice) => (
-                            <option key={choice} value={choice}>
-                                {choice}
+                        {elementChoices && elementChoices.map((data) => (
+                            <option key={data} value={data}>
+                                {data}
                             </option>
                         ))}
                     </select>
