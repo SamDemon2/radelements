@@ -27,9 +27,9 @@ export interface DeviceNamesState {
     device_names: string[];
 }
 
-export interface ElementChoicesState {
-    elementChoices: string[];
-}
+// export interface ElementChoicesState {
+//     elementChoices: string[];
+// }
 
 export interface TableData {
     components: (RadioComponent | ReplacementChoice)[];
@@ -41,7 +41,7 @@ export interface TableData {
 
 export interface RootState {
     tableData: TableData;
-    elementChoices: string[]; // Определяем правильно elementChoices
+    // tableDataElementChoices: ElementChoicesState;// Определяем правильно elementChoices
     user: User | null;
 }
 
@@ -52,7 +52,7 @@ type ActionTypes =
     | { type: 'ADD_ELEMENT_TO_DB'; payload: ReplacementChoice }
     | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent }
     | { type: 'SET_DEVICE_NAMES'; payload: DeviceNamesState }
-    | { type: 'SET_ELEMENT_CHOICES'; payload: string[] }
+    // | { type: 'SET_ELEMENT_CHOICES'; payload: string[] }
     | { type: 'LOGIN'; payload: User }
     | { type: 'LOGOUT' };
 
@@ -64,7 +64,7 @@ const initialState: RootState = {
         inter_components: [],
         device_components: { device_names: [] },
     },
-    elementChoices: [],
+    // tableDataElementChoices: [],
         user: null,
 };
 
@@ -96,8 +96,8 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                     device_components: { device_names: action.payload.device_names },
                 },
             };
-        case 'SET_ELEMENT_CHOICES':
-            return { ...state, elementChoices: action.payload };
+        // case 'SET_ELEMENT_CHOICES':
+        //     return { ...state, elementChoices: action.payload };
         case 'LOGIN':
             return { ...state, user: action.payload };
         case 'LOGOUT':

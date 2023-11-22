@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
+import tableDataElementChoicesReducer from "./listreducers";
 
 const combinedReducer = combineReducers({
     tableData: rootReducer,
+    tableDataElementChoices: tableDataElementChoicesReducer,
 });
 
 const store = configureStore({
