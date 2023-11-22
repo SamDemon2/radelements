@@ -11,7 +11,7 @@ interface OrderItem {
 }
 
 const ShowOrder: React.FC = () => {
-  const reduxTableData = useSelector((state: RootState) => state.tableData);
+  const reduxTableData = useSelector((state: RootState) => state.rootState.tableData.show_components);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,8 +30,8 @@ const ShowOrder: React.FC = () => {
             </tr>
             </thead>
             <tbody>
-            {reduxTableData ? (
-                reduxTableData.tableData.show_components.map((item: OrderItem) => (
+            {reduxTableData && reduxTableData.length > 0 ? (
+                reduxTableData.map((item: OrderItem) => (
                     <tr key={item.component}>
                       <td>{item.component}</td>
                       <td>{item.in_stock}</td>

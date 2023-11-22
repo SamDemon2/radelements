@@ -51,7 +51,7 @@ type ActionTypes =
     | { type: 'SET_SHOW_DATA'; payload: OrderItem[] }
     | { type: 'ADD_ELEMENT_TO_DB'; payload: ReplacementChoice }
     | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent }
-    | { type: 'SET_DEVICE_NAMES'; payload: DeviceNamesState }
+    | { type: 'SET_DEVICE_NAMES'; payload: string[] }
     // | { type: 'SET_ELEMENT_CHOICES'; payload: string[] }
     | { type: 'LOGIN'; payload: User }
     | { type: 'LOGOUT' };
@@ -75,7 +75,7 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
         case 'SET_ORD_TABLE_DATA':
             return { ...state, tableData: { ...state.tableData, order_components: action.payload } };
         case 'SET_SHOW_DATA':
-            return { ...state, tableData: { ...state.tableData, show_components: action.payload } };
+            return { ...state, tableData: {...state.tableData, show_components: action.payload } };
         case 'ADD_ELEMENT_TO_DB':
             const newComponents = [...state.tableData.components, action.payload];
             return { ...state, tableData: { ...state.tableData, components: newComponents } };
@@ -93,8 +93,10 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                 ...state,
                 tableData: {
                     ...state.tableData,
-                    device_components: { device_names: action.payload.device_names },
-                },
+                    device_components: {
+                        device_names: action.payload
+                    }
+                }
             };
         // case 'SET_ELEMENT_CHOICES':
         //     return { ...state, elementChoices: action.payload };

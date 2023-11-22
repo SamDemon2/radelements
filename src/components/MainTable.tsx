@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
 const MainTable = () => {
-    const reduxTableData = useSelector((state: RootState) => state.tableData);
+    const reduxTableData = useSelector((state: RootState) => state.rootState);
     const dispatch: ThunkDispatch<RootState, void, AnyAction> = useDispatch();
 
     useEffect(() => {

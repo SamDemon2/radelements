@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import tableDataElementChoicesReducer from "./listreducers";
 
 const combinedReducer = combineReducers({
-    tableData: rootReducer,
+    rootState: rootReducer,
     tableDataElementChoices: tableDataElementChoicesReducer,
 });
 

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"; // Импортируем хук useS
 
 const IntermediateTable = () => {
     // Используем useSelector, чтобы получить данные из хранилища
-    const intermediateComponents = useSelector((state:RootState) => state.tableData.tableData.inter_components);
+    const intermediateComponents = useSelector((state:RootState) => state.rootState.tableData.inter_components);
 
     return (
         <table className="table table-dark table-striped table-bordered table-hover">

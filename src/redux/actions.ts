@@ -101,15 +101,15 @@ export const addIntermediateData = (intermediateData: IntermediateComponent) => 
     payload: intermediateData,
 });
 
-export const setDeviceNames = (deviceNames: string[]) => ({
+export const setDeviceNames = (deviceNames: DeviceNamesState) => ({
    type: "SET_DEVICE_NAMES",
-    payload: { device_names: deviceNames },
+    payload: deviceNames,
 });
 
 export const fetchDeviceNames = () => {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch, getState: () => RootState) => {
         try {
-            const response = await axios.get<{ device_names: string[] }>('http://127.0.0.1:8000/api/v1/add/');
+                const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
             const deviceNames = response.data.device_names;
             console.log('Device names from the server:', deviceNames);
             dispatch(setDeviceNames(deviceNames));
