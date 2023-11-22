@@ -5,7 +5,7 @@ import {
     OrderItem,
     ReplacementChoice,
     IntermediateComponent,
-    DeviceNamesState
+    DeviceNamesState, AddDeviceNames
 } from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -109,7 +109,7 @@ export const setDeviceNames = (deviceNames: DeviceNamesState) => ({
 export const fetchDeviceNames = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
         try {
-                const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
+            const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
             const deviceNames = response.data.device_names;
             console.log('Device names from the server:', deviceNames);
             dispatch(setDeviceNames(deviceNames));
@@ -119,6 +119,25 @@ export const fetchDeviceNames = () => {
     };
 };
 
+
+export const setAddNames = (addNames: AddDeviceNames) => ({
+   type: 'ADD_NEW_DEVICE_NAMES',
+   payload: addNames,
+});
+
+
+export const fetchAddNames = () => {
+    return async (dispatch: Dispatch, getState: () => RootState) => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/api/v1/update/');
+            const addNames = response.data.comp_names;
+            console.log('Device names from the server:', addNames);
+            dispatch(setAddNames(addNames));
+        } catch (error) {
+            console.error('Ошибка при получении имен устройств:', error);
+        }
+    };
+};
 
 export const fetchElementChoices = createAsyncThunk(
     'SET_ELEMENT_CHOICES',
@@ -139,4 +158,3 @@ export const setElementChoices = (elementChoices: string[]) => ({
     type: 'SET_ELEMENT_CHOICES',
     payload: elementChoices,
 });
-

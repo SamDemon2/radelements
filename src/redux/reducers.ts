@@ -27,9 +27,10 @@ export interface DeviceNamesState {
     device_names: string[];
 }
 
-// export interface ElementChoicesState {
-//     elementChoices: string[];
-// }
+export interface AddDeviceNames {
+    comp_names: string[];
+}
+
 
 export interface TableData {
     components: (RadioComponent | ReplacementChoice)[];
@@ -37,11 +38,11 @@ export interface TableData {
     show_components: OrderItem[];
     inter_components: IntermediateComponent[];
     device_components: DeviceNamesState;
+    add_names_components: AddDeviceNames;
 }
 
 export interface RootState {
     tableData: TableData;
-    // tableDataElementChoices: ElementChoicesState;// Определяем правильно elementChoices
     user: User | null;
 }
 
@@ -52,7 +53,7 @@ type ActionTypes =
     | { type: 'ADD_ELEMENT_TO_DB'; payload: ReplacementChoice }
     | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent }
     | { type: 'SET_DEVICE_NAMES'; payload: string[] }
-    // | { type: 'SET_ELEMENT_CHOICES'; payload: string[] }
+    | { type: 'ADD_NEW_DEVICE_NAMES'; payload: string[]}
     | { type: 'LOGIN'; payload: User }
     | { type: 'LOGOUT' };
 
@@ -63,8 +64,8 @@ const initialState: RootState = {
         show_components: [],
         inter_components: [],
         device_components: { device_names: [] },
+        add_names_components: {comp_names: []}
     },
-    // tableDataElementChoices: [],
         user: null,
 };
 
@@ -98,8 +99,16 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                     }
                 }
             };
-        // case 'SET_ELEMENT_CHOICES':
-        //     return { ...state, elementChoices: action.payload };
+        case 'ADD_NEW_DEVICE_NAMES':
+            return {
+                ...state,
+                tableData: {
+                    ...state.tableData,
+                    add_names_components: {
+                        comp_names: action.payload
+                    }
+                }
+            };
         case 'LOGIN':
             return { ...state, user: action.payload };
         case 'LOGOUT':
