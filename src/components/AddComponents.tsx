@@ -18,7 +18,7 @@ const AddComponents: React.FC = () => {
         amount: 0,
     });
 
-    const compNames = useSelector((state: RootState) => state.rootState.tableData.add_names_components.comp_names);
+    const compNames = useSelector((state: RootState) => state.rootState.tableData.add_names_components);
 
     useEffect(() => {
         dispatch(fetchAddNames() as any)
@@ -100,13 +100,12 @@ const AddComponents: React.FC = () => {
                              value={topFormData.category}
                              onChange={handleTopCategoryChange}
                              className="form-select w-100" aria-label="Default select example">
-                        <option selected>Chose category</option>
-                        <option value="Resistor">Resistor</option>
-                        <option value="Capacitor">Capacitor</option>
-                        <option value="NPN Transistor">NPN Transistor</option>
-                        <option value="LED">LED</option>
-                        <option value="Relay">Relay</option>
-                        <option value="Piezoelectric Buzzer">Piezoelectric Buzzer</option>
+                        <option value="" disabled>Chose category</option>
+                        {compNames.categories.map((category) => (
+                            <option key={category} value={category}>
+                                {category}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
@@ -122,7 +121,7 @@ const AddComponents: React.FC = () => {
                              onChange={handleTopCompNameChange}
                              className="form-select w-100">
                         <option value="" disabled>Chose name</option>
-                        {compNames.map((name) => (
+                        {compNames.comp_names.map((name) => (
                             <option key={name} value={name}>
                         {name}
                             </option>

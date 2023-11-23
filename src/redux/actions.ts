@@ -120,9 +120,9 @@ export const fetchDeviceNames = () => {
 };
 
 
-export const setAddNames = (addNames: AddDeviceNames) => ({
+export const setAddNames = (data: AddDeviceNames) => ({
    type: 'ADD_NEW_DEVICE_NAMES',
-   payload: addNames,
+   payload: data,
 });
 
 
@@ -130,14 +130,37 @@ export const fetchAddNames = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/update/');
-            const addNames = response.data.comp_names;
-            console.log('Device names from the server:', addNames);
-            dispatch(setAddNames(addNames));
+            const data = response.data.add_data;
+            const addData = data.map((item: any) => ({
+                comp_names: item.comp_names,
+                categories: item.categories,
+            }));
+            console.log('Device names from the server:', addData);
+            dispatch(setAddNames(addData));
         } catch (error) {
             console.error('Ошибка при получении имен устройств:', error);
         }
     };
 };
+
+// export const fetchShowData = () => {
+//     return async (dispatch: Dispatch, getState: () => RootState) => {
+//         try {
+//             const response = await axios.get('http://localhost:8000/api/v1/show/');
+//             const data = response.data.order_data;
+//
+//             const showData = data.map((item: any) => ({
+//                 component: item.comp_name,
+//                 in_stock: item.in_stock,
+//                 amount_need: item.amount_need,
+//             }));
+//
+//             dispatch(setShowData(showData));
+//         } catch (error) {
+//             console.error('Error fetching show data:', error);
+//         }
+//     };
+// };
 
 export const fetchElementChoices = createAsyncThunk(
     'SET_ELEMENT_CHOICES',
