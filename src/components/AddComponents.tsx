@@ -1,9 +1,10 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
-import {addIntermediateData} from "../redux/actions";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addIntermediateData, fetchAddNames} from "../redux/actions";
 import IntermediateTable from "./IntermediateTable";
+import {RootState} from "../redux/store";
 
-const AddComponents = () => {
+const AddComponents: React.FC = () => {
     const dispatch =useDispatch();
     const [topFormData, setTopFormData] = useState({
         category: "",
@@ -16,6 +17,12 @@ const AddComponents = () => {
         comp_name: "",
         amount: 0,
     });
+
+    const compNames = useSelector((state: RootState) => state.rootState.tableData.add_names_components.comp_names);
+
+    useEffect(() => {
+        dispatch(fetchAddNames() as any)
+    }, [dispatch]);
 
     const handleTopCategoryChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -102,12 +109,7 @@ const AddComponents = () => {
                         <option value="Piezoelectric Buzzer">Piezoelectric Buzzer</option>
                     </select>
                 </div>
-                {/*<div className='col-2'>*/}
 
-                {/*</div>*/}
-                {/*<div className="col-4">*/}
-                {/*    <IntermediateTable/>*/}
-                {/*</div>*/}
             </div>
 
             <div className="row my-3">
@@ -119,22 +121,12 @@ const AddComponents = () => {
                              value={topFormData.comp_name}
                              onChange={handleTopCompNameChange}
                              className="form-select w-100">
-                        <option selected>Chose name</option>
-                        <option value="Resistor 395 Ohms">Resistor 395 Ohms</option>
-                        <option value="Capacitor 10 µF">Capacitor 10 µF</option>
-                        <option value="NPN Transistor BC547">NPN Transistor BC547</option>
-                        <option value="5mm Light Emitting Diode (LED)">5mm Light Emitting Diode (LED)</option>
-                        <option value="12V Relay">12V Relay</option>
-                        <option value="Piezoelectric Buzzer (3.5 kHz)">Piezoelectric Buzzer (3.5 kHz)</option>
-                        <option value="Transformer 220V/12V">Transformer 220V/12V</option>
-                        <option value="DS18B20 Temperature Sensor">DS18B20 Temperature Sensor</option>
-                        <option value="Optocoupler PC817">Optocoupler PC817</option>
-                        <option value="Arduino Uno Microcontroller">Arduino Uno Microcontroller</option>
-                        <option value="Tactile Push Button 1">Tactile Push Button 1</option>
-                        <option value="1 kOhm Resistor">1 kOhm Resistor</option>
-                        <option value="100 µF Electrolytic Capacitor">100 µF Electrolytic Capacitor</option>
-                        <option value="PNP Transistor 2N3906">PNP Transistor 2N3906</option>
-                        <option value="1N4148 Diode">1N4148 Diode</option>
+                        <option value="" disabled>Chose name</option>
+                        {compNames.map((name) => (
+                            <option key={name} value={name}>
+                        {name}
+                            </option>
+                            ))}
                     </select>
                 </div>
             </div>
