@@ -54,7 +54,7 @@ type ActionTypes =
     | { type: 'ADD_ELEMENT_TO_DB'; payload: ReplacementChoice }
     | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent }
     | { type: 'SET_DEVICE_NAMES'; payload: string[] }
-    | { type: 'ADD_NEW_DEVICE_NAMES'; payload: string[]}
+    | { type: 'ADD_NEW_DEVICE_NAMES'; payload: AddDeviceNames}
     | { type: 'LOGIN'; payload: User }
     | { type: 'LOGOUT' };
 
@@ -106,7 +106,7 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                 tableData: {
                     ...state.tableData,
                     add_names_components: {
-                        comp_names: action.payload, categories: action.payload
+                        comp_names: action.payload.comp_names, categories: action.payload.categories
                     }
                 }
             };

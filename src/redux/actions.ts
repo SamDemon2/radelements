@@ -130,11 +130,11 @@ export const fetchAddNames = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/update/');
-            const data = response.data.add_data;
-            const addData = data.map((item: any) => ({
-                comp_names: item.comp_names,
-                categories: item.categories,
-            }));
+            //const data = response.data;
+            const addData: AddDeviceNames = {
+                comp_names: response.data.comp_names,
+                categories: response.data.categories
+            }
             console.log('Device names from the server:', addData);
             dispatch(setAddNames(addData));
         } catch (error) {

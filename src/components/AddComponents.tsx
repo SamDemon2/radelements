@@ -173,13 +173,12 @@ const AddComponents: React.FC = () => {
                         value={bottomFormData.category}
                         onChange={handleBottomCategoryChange}
                         className="form-select w-100" aria-label="Default select example">
-                        <option selected>Chose category</option>
-                        <option value="Resistor">Resistor</option>
-                        <option value="Capacitor">Capacitor</option>
-                        <option value="NPN Transistor">NPN Transistor</option>
-                        <option value="LED">LED</option>
-                        <option value="Relay">Relay</option>
-                        <option value="Piezoelectric Buzzer">Piezoelectric Buzzer</option>
+                        <option value="" disabled>Chose category</option>
+                        {compNames.categories.map((category) => (
+                            <option key={category} value={category}>
+                                {category}
+                            </option>
+                        ))}
                     </select>
                 </div>
             </div>
