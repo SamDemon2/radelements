@@ -150,14 +150,15 @@ class UpdateDBAPI(APIView):
     # permission_classes = (IsAuthenticated,)
     def get(self, request):
         values = Components.objects.values_list("comp_name", flat=True)
+        categories = Category.objects.values_list("cat_name", flat=True)
         print(values)
-        return Response({"comp_names": values})
+        return Response({"status": 200, "comp_names": values, "categories": categories})
 
     def post(self, request):
         serializer = UpdateSerializer(data=request.data)
         serializer.is_valid()
         for comp in request.data:
-            amount_add = comp["amount_add"]
+            amount_add = int(comp["amount_add"])
             try:
                 comp_name = comp["comp_name"]
                 component = Components.objects.get(comp_name=comp_name)
