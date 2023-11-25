@@ -76,6 +76,7 @@ const Base: React.FC = () => {
                             className="form-control w-100"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
+                            type="number"
                         />
                     </div>
                 </div>
