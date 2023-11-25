@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { sendElementToServer, fetchElementChoices } from '../redux/actions';
+import { sendElementToServer } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReplacementChoice } from '../redux/reducers';
 

@@ -143,41 +143,6 @@ export const fetchAddNames = () => {
     };
 };
 
-// export const fetchShowData = () => {
-//     return async (dispatch: Dispatch, getState: () => RootState) => {
-//         try {
-//             const response = await axios.get('http://localhost:8000/api/v1/show/');
-//             const data = response.data.order_data;
-//
-//             const showData = data.map((item: any) => ({
-//                 component: item.comp_name,
-//                 in_stock: item.in_stock,
-//                 amount_need: item.amount_need,
-//             }));
-//
-//             dispatch(setShowData(showData));
-//         } catch (error) {
-//             console.error('Error fetching show data:', error);
-//         }
-//     };
-// };
 
-export const fetchElementChoices = createAsyncThunk(
-    'SET_ELEMENT_CHOICES',
-    async (_, { dispatch }) => {
-        try {
-            const response = await axios.get<{ data: string[] }>(
-                'http://127.0.0.1:8000/api/v1/replace/'
-            );
-            const elementChoices = response.data.data;
-            dispatch(setElementChoices(elementChoices));
-        } catch (error) {
-            console.error('Error fetching element choices:', error);
-        }
-    }
-);
 
-export const setElementChoices = (elementChoices: string[]) => ({
-    type: 'SET_ELEMENT_CHOICES',
-    payload: elementChoices,
-});
+
