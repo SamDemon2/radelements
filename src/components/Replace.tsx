@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { sendElementToServer } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReplacementChoice } from '../redux/reducers';
+import { fetchReplaceList } from '../redux/actions'; // Подставьте свои действия
+import { RootState } from '../redux/store';
 
-const Replace = () => {
+const Replace: React.FC = () => {
     const [selectedElement, setSelectedElement] = useState('');
     const dispatch = useDispatch();
 
+    // Подставьте ваш селектор
+    const replaceList = useSelector((state: RootState) => state.rootState.tableData.replaced_components.replaceList);
+
+    useEffect(() => {
+        dispatch(fetchReplaceList() as any); // Подставьте свой метод получения данных
+    }, [dispatch]);
 
     const handleElementChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedElement(event.target.value);
     };
 
-    const handleAddToDatabase = () => {
-        if (selectedElement) {
-            const replacementChoice: ReplacementChoice = {
-                replacement_choice: selectedElement,
-            };
-            dispatch(sendElementToServer(replacementChoice) as any).then(() => {
-                setSelectedElement('');
-            });
-        }
-    };
+
 
     return (
         <div className="container">
@@ -35,19 +32,17 @@ const Replace = () => {
                         onChange={handleElementChange}
                     >
                         <option value="">--------</option>
-                        <option value="RadioComponent1">Radio Component 1</option>
-                        <option value="RadioComponent2">Radio Component 2</option>
-                        <option value="RadioComponent3">Radio Component 3</option>
-                        <option value="RadioComponent4">Radio Component 4</option>
-                        <option value="RadioComponent5">Radio Component 5</option>
-                        <option value="RadioComponent6">Radio Component 6</option>
-                        <option value="RadioComponent7">Radio Component 7</option>
+                        {replaceList.map((element) => (
+                            <option key={element} value={element}>
+                                {element}
+                            </option>
+                        ))}
                     </select>
                     <div className="d-grid">
                         <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={handleAddToDatabase}
+                            // onClick={""}
                         >
                             ОК
                         </button>

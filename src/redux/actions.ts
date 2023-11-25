@@ -3,7 +3,6 @@ import {
     RootState,
     RadioComponent,
     OrderItem,
-    ReplacementChoice,
     IntermediateComponent,
     DeviceNamesState, AddDeviceNames
 } from "./reducers"; // Импортируем интерфейсы из reducers
@@ -27,27 +26,7 @@ export const setShowData = (data: OrderItem[]) => ({
     payload: data,
 });
 
-// Добавляем новое действие для добавления элемента в базу данных
-export const addElementToDatabase = (replacementChoice: ReplacementChoice) => ({
-    type: "ADD_ELEMENT_TO_DB",
-    payload: replacementChoice,
-});
 
-export const sendElementToServer = (replacementChoice: ReplacementChoice) => {
-    return async (dispatch: Dispatch) => {
-        try {
-            await axios.post('http://127.0.0.1:8000/api/v1/replace/', replacementChoice);
-            // Обработка успешного ответа от сервера, если необходимо
-            console.log("Element successfully sent to the backend");
-
-            // Вызываем действие ADD_ELEMENT_TO_DB с данными
-            dispatch(addElementToDatabase(replacementChoice));
-        } catch (error) {
-            // Обработка ошибки, если что-то пошло не так
-            console.error("Error sending element to the backend:", error);
-        }
-    };
-};
 
 
 export const fetchTableData = () => {
@@ -143,6 +122,21 @@ export const fetchAddNames = () => {
     };
 };
 
+export const setReplaceList = (replaceList: string[]) => ({
+    type: 'SET_REPLACE_LIST',
+    payload: replaceList,
+});
 
+export const fetchReplaceList = () => {
+    return async (dispatch: Dispatch, getState: () => RootState) => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/api/v1/replace/');
+            const replaceList = response.data.data;
+            dispatch(setReplaceList(replaceList));
+        } catch (error) {
+            console.error('Error fetching replace list:', error);
+        }
+    };
+};
 
 
