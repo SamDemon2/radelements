@@ -1,16 +1,18 @@
+// Base.tsx
+
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchDeviceNames} from '../redux/actions';
+import { fetchDeviceNames } from '../redux/actions';
+import { postDeviceData } from '../api/requests'; // Подставьте правильный путь
 import { RootState } from "../redux/store";
 
 const Base: React.FC = () => {
     const [selectedDevice, setSelectedDevice] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
-    // Обновляем тип для хранения только device_names
     const dispatch = useDispatch();
 
     useEffect(() => {
-       dispatch(fetchDeviceNames() as any);
+        dispatch(fetchDeviceNames() as any);
     }, [dispatch]);
 
     const reduxTableData = useSelector((state: RootState) => state.rootState.tableData.device_components.device_names);
@@ -19,12 +21,29 @@ const Base: React.FC = () => {
         setSelectedDevice(e.target.value);
     };
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        // Ваша логика для обработки данных при отправке формы
+
+        try {
+            const dataToSend = {
+                device_name: selectedDevice,
+                device_need: parseInt(amount, 10),
+            };
+
+            const result = await postDeviceData(dataToSend);
+            console.log('Response from the server:', result);
+
+            // Можете выполнить какие-то дополнительные действия после успешного запроса, если необходимо
+
+        } catch (error) {
+            console.error('Error while posting data:', error);
+            // Обработка ошибок
+        }
     };
-    if(!reduxTableData || reduxTableData.length === 0)
+
+    if (!reduxTableData || reduxTableData.length === 0)
         return null;
+
     return (
         <div className="ms-3 me-3">
             <form onSubmit={handleSubmit}>
