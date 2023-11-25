@@ -214,17 +214,12 @@ const AddComponents: React.FC = () => {
                     <div className="col-4">
 
                     </div>
-                    <div className="col-1 d-flex justify-content-end">
+                    <div className="col-2 d-flex justify-content-end">
                         <button className="btn btn-primary">
                             Submit
                         </button>
                     </div>
-                    <div className="col-1"></div>
-                    <div className="col-2 d-flex justify-content-start">
-                        <button className=" btn btn-primary">
-                            Add over
-                        </button>
-                    </div>
+
                 </div>
             </div>
             </form>

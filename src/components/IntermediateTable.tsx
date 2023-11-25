@@ -7,6 +7,7 @@ const IntermediateTable = () => {
     const intermediateComponents = useSelector((state:RootState) => state.rootState.tableData.inter_components);
 
     return (
+        <div>
         <table className="table table-dark table-striped table-bordered table-hover">
             <thead>
             <tr>
@@ -25,6 +26,8 @@ const IntermediateTable = () => {
             ))}
             </tbody>
         </table>
+            <button type="submit" className="btn btn-primary">Sent to database</button>
+        </div>
     );
 };
 
