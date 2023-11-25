@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchReplaceList } from '../redux/actions'; // Подставьте свои действия
 import { RootState } from '../redux/store';
+import {postReplaceData} from "../api/requests";
 
 const Replace: React.FC = () => {
     const [selectedElement, setSelectedElement] = useState('');
@@ -18,6 +19,24 @@ const Replace: React.FC = () => {
         setSelectedElement(event.target.value);
     };
 
+    const handleAddToDatabase = () => {
+        if (selectedElement) {
+            const data = {
+                replacement_choice: selectedElement,
+            };
+
+            // Используем ваш метод для отправки данных
+            postReplaceData(data)
+                .then((response) => {
+                    console.log('Data sent successfully:', response);
+                    // Добавьте необходимую логику после успешной отправки
+                    setSelectedElement('');
+                })
+                .catch((error) => {
+                    console.error('Error sending data to server:', error);
+                });
+        }
+    };
 
 
     return (
@@ -42,7 +61,7 @@ const Replace: React.FC = () => {
                         <button
                             type="button"
                             className="btn btn-primary"
-                            // onClick={""}
+                            onClick={handleAddToDatabase}
                         >
                             ОК
                         </button>
