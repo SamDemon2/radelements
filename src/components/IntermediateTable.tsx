@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { postAddComponentData } from "../api/requests";
 import { useNavigate } from "react-router-dom"; // Импортируем useNavigate
@@ -12,7 +12,6 @@ interface AddComponentData {
 }
 
 const IntermediateTable = () => {
-    const dispatch = useDispatch();
     const intermediateComponents = useSelector(
         (state: RootState) => state.rootState.tableData.inter_components
     );
