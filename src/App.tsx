@@ -62,10 +62,10 @@ function App() {
                       }
                   />
               )}
-              <Route path="my-table" element={<MainTable />} />
-              <Route path="my-base" element={<Base />} />
-              <Route path="my-replace" element={<Replace />} />
-              <Route path="my-orders" element={<ShowOrder />} />
+              <Route path="my-table" element={<MainTable/>} />
+              <Route path="my-base" element={<Base/>} />
+              <Route path="my-replace" element={<Replace/>} />
+              <Route path="my-orders" element={<ShowOrder/>} />
               <Route path ="my-add" element={<AddComponents/>}/>
               <Route path="my-add-devices" element={<AddDevices/>}/>
               <Route path="my-auth" element={<LoginForm onLoginSuccess={handleLoginSuccess} />} />
