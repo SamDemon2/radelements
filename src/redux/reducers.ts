@@ -32,6 +32,10 @@ export interface AddDeviceNames {
     categories: string[];
 }
 
+export interface CompToDevNames {
+    data: string[];
+}
+
 
 export interface TableData {
     components: RadioComponent[];
@@ -41,6 +45,7 @@ export interface TableData {
     device_components: DeviceNamesState;
     add_names_components: AddDeviceNames;
     replaced_components: ReplaceState;
+    comptodev_componenrs: CompToDevNames;
 }
 
 export interface RootState {
@@ -55,6 +60,7 @@ type ActionTypes =
     | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent }
     | { type: 'SET_DEVICE_NAMES'; payload: string[] }
     | { type: 'SET_REPLACE_LIST'; payload: string[] }
+    | { type: 'SET_COMPTODEV_LIST'; payload: string[] }
     | { type: 'ADD_NEW_DEVICE_NAMES'; payload: AddDeviceNames}
     | { type: 'LOGIN'; payload: User }
     | { type: 'LOGOUT' };
@@ -68,6 +74,7 @@ const initialState: RootState = {
         device_components: { device_names: [] },
         add_names_components: {comp_names: [], categories: [] },
         replaced_components: {replaceList: []},
+        comptodev_componenrs: {data: []},
     },
         user: null,
 };
@@ -107,6 +114,16 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                     ...state.tableData,
                     replaced_components: {
                         replaceList: action.payload
+                    }
+                }
+            };
+        case 'SET_COMPTODEV_LIST':
+            return {
+                ...state,
+                tableData: {
+                    ...state.tableData,
+                    comptodev_componenrs: {
+                        data: action.payload
                     }
                 }
             };
