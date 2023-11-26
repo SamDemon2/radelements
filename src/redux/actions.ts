@@ -1,13 +1,11 @@
 import { Dispatch } from "redux";
 import {
-    RootState,
     RadioComponent,
     OrderItem,
     IntermediateComponent,
     DeviceNamesState, AddDeviceNames
 } from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
-import { createAsyncThunk } from '@reduxjs/toolkit';
 
 
 // Указываем новые интерфейсы для параметров
@@ -30,7 +28,7 @@ export const setShowData = (data: OrderItem[]) => ({
 
 
 export const fetchTableData = () => {
-    return async (dispatch: Dispatch, getState: () => RootState) => {
+    return async (dispatch: Dispatch) => {
         try {
             const response = await axios.get('http://localhost:8000/api/v1/complist/');
             const data = response.data;
@@ -57,7 +55,7 @@ export const fetchTableData = () => {
 };
 
 export const fetchShowData = () => {
-    return async (dispatch: Dispatch, getState: () => RootState) => {
+    return async (dispatch: Dispatch) => {
         try {
             const response = await axios.get('http://localhost:8000/api/v1/show/');
             const data = response.data.order_data;
@@ -86,7 +84,7 @@ export const setDeviceNames = (deviceNames: DeviceNamesState) => ({
 });
 
 export const fetchDeviceNames = () => {
-    return async (dispatch: Dispatch, getState: () => RootState) => {
+    return async (dispatch: Dispatch) => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
             const deviceNames = response.data.device_names;
@@ -106,7 +104,7 @@ export const setAddNames = (data: AddDeviceNames) => ({
 
 
 export const fetchAddNames = () => {
-    return async (dispatch: Dispatch, getState: () => RootState) => {
+    return async (dispatch: Dispatch) => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/update/');
             //const data = response.data;
@@ -128,7 +126,7 @@ export const setReplaceList = (replaceList: string[]) => ({
 });
 
 export const fetchReplaceList = () => {
-    return async (dispatch: Dispatch, getState: () => RootState) => {
+    return async (dispatch: Dispatch) => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/replace/');
             const replaceList = response.data.data;
