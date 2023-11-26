@@ -137,20 +137,20 @@ export const fetchReplaceList = () => {
     };
 };
 
-export const setCompToDevList= (ctd_names: CompToDevNames) => ({
+export const setCompToDevList= (data: CompToDevNames) => ({
     type: 'SET_COMPTODEV_LIST',
-    payload: ctd_names,
+    payload: data,
 })
 export const fetchCompToDevList = () => {
   return async (dispatch: Dispatch) => {
       try {
           const response = await  axios.get('http://127.0.0.1:8000/api/v1/add-new-device/');
-          const ctd_names = response.data.ctd_names;
-          dispatch(setDeviceNames(ctd_names));
+          const data = response.data.data;
+          dispatch(setCompToDevList(data));
       } catch (error) {
           console.error('Error fetching ctd list:', error);
       }
-  }
-}
+  };
+};
 
 

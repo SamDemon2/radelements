@@ -1,6 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../redux/store";
+import {fetchCompToDevList} from "../redux/actions";
+import AddDeviceTable from "./AddDeviceTable";
 
 const AddDevices: React.FC = () => {
+    const dispatch = useDispatch();
+    const CTDNames = useSelector((state: RootState)=> state.rootState.tableData.comptodev_componenrs.data);
+    useEffect(() => {
+        dispatch(fetchCompToDevList() as any)
+    }, [dispatch]);
+
+    // if (!CTDNames) {
+    //     // Можете добавить здесь индикатор загрузки или вернуть null
+    //     return <div>Loading...</div>;
+    // }
+
   return <>
      <div className="ms-3 me-3">
             <div className="row my-3">
@@ -26,6 +41,11 @@ const AddDevices: React.FC = () => {
                                          aria-label="Default select example"
                                          name="comp_name">
                                     <option value="" disabled>Select components</option>
+                                     {CTDNames.map((device) => (
+                                         <option key={device} value={device}>
+                                             {device}
+                                         </option>
+                                     ))}
                                  </select>
                             </div>
                         </div>
@@ -40,6 +60,9 @@ const AddDevices: React.FC = () => {
                             </div>
                         </div>
                     </form>
+                    <div className="col-4 my-4">
+                        <AddDeviceTable/>
+                    </div>
                 </div>
             </div>
      </div>

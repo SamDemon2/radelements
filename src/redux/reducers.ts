@@ -19,6 +19,10 @@ export interface IntermediateComponent {
     amount: number;
 }
 
+export interface AddDeviceComponent {
+    device_name: string;
+
+}
 export interface ReplaceState  {
     replaceList: string[];
 }
@@ -33,7 +37,7 @@ export interface AddDeviceNames {
 }
 
 export interface CompToDevNames {
-    ctd_names: string[];
+    data: string[];
 }
 
 
@@ -74,7 +78,7 @@ const initialState: RootState = {
         device_components: { device_names: [] },
         add_names_components: {comp_names: [], categories: [] },
         replaced_components: {replaceList: []},
-        comptodev_componenrs: {ctd_names: []},
+        comptodev_componenrs: {data: []},
     },
         user: null,
 };
@@ -123,7 +127,7 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                 tableData: {
                     ...state.tableData,
                     comptodev_componenrs: {
-                        ctd_names: action.payload
+                        data: action.payload
                     }
                 }
             };
