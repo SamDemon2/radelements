@@ -3,7 +3,7 @@ import {
     RadioComponent,
     OrderItem,
     IntermediateComponent,
-    DeviceNamesState, AddDeviceNames
+    DeviceNamesState, AddDeviceNames, CompToDevNames
 } from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
 
@@ -136,5 +136,21 @@ export const fetchReplaceList = () => {
         }
     };
 };
+
+export const setCompToDevList= (ctd_names: CompToDevNames) => ({
+    type: 'SET_COMPTODEV_LIST',
+    payload: ctd_names,
+})
+export const fetchCompToDevList = () => {
+  return async (dispatch: Dispatch) => {
+      try {
+          const response = await  axios.get('http://127.0.0.1:8000/api/v1/add-new-device/');
+          const ctd_names = response.data.ctd_names;
+          dispatch(setDeviceNames(ctd_names));
+      } catch (error) {
+          console.error('Error fetching ctd list:', error);
+      }
+  }
+}
 
 
