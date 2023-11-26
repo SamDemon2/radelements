@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os.path
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 # from components.serializers import UserCreateDisabledSerializer
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -90,6 +93,9 @@ DATABASES = {
         "ATOMIC REQUESTS": True
     }
 }
+
+
+
 
 
 # Password validation

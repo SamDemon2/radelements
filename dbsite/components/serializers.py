@@ -17,7 +17,7 @@ class CompSerializer(serializers.Serializer):
 
 class UpdateSerializer(serializers.Serializer): # new
     comp_name = serializers.CharField(max_length=255)
-    new_comp_name = serializers.CharField(max_length=255)
+    # new_comp_name = serializers.CharField(max_length=255)
     category = serializers.IntegerField()
     amount_add = serializers.IntegerField()
 
@@ -31,6 +31,16 @@ class ShowSerializer(serializers.Serializer):
 
 class ReplaceSerializer(serializers.Serializer):
     replacement_choice = serializers.CharField(max_length=255)
+
+
+class CompDataSerializer(serializers.Serializer):
+    comp_name = serializers.CharField()
+    amount_need = serializers.IntegerField()
+
+
+class AddNewDeviceSerializer(serializers.Serializer):
+    device_name = serializers.CharField()
+    comp_data = CompDataSerializer(many=True)
 
 
 class UserCreateDisabledSerializer(UserCreateSerializer):

@@ -8,35 +8,17 @@ from .serializers import *
 from .utils import *
 import sqlite3
 
-menu = [
-    {"title": "All components", "url_name": "home"},
-    {"title": "Select device", "url_name": "device"},
-    {"title": "Show order", "url_name": "show"},
-
-]
-
 
 class CompAPIView(generics.ListAPIView):
     queryset = Components.objects.all()
     serializer_class = IndexSerializer
     # permission_classes = (IsAuthenticated, )
 
+menu = {"ok": "ok"}
 
-# class CompListAPIView(generics.ListAPIView):
-#     def custom_query(self):
-#         with sqlite3.connect("db.sqlite3") as connection:
-#             cur = connection.cursor()
-#             query = """SELECT comp_id, comp_name, cat_name, amount FROM components_components
-#                         INNER JOIN components_category ON components_components.cat = components_category.cat_id"""
-#             cur.execute(query)
-#             result = cur.fetchall()
-#             return result
-#
-
-
-def index(request):
-    components = Components.objects.all()
-    return render(request, "components/index.html", {"title": "Main page", "menu": menu, "components": components})
+# def index(request):
+#     components = Components.objects.all()
+#     return render(request, "components/index.html", {"title": "Main page", "menu": menu, "components": components})
 
 
 class DeviceAPI(APIView):
@@ -165,15 +147,41 @@ class UpdateDBAPI(APIView):
                 new_amount = component.amount + amount_add
                 Components.objects.filter(comp_name=comp_name).update(amount=new_amount)
             except:
-                try:
-                    component = Category.objects.get(cat_name=comp["category"])
-                except:
-                    Category.objects.create(cat_name=comp["category"])
-                    component = Category.objects.get(cat_name=comp["category"])
+                component = Category.objects.get(cat_name=comp["category"])
                 category = component.cat_id
-                Components.objects.create(comp_name=comp["new_comp_name"], cat=category, amount=comp["amount_add"])
+                Components.objects.create(comp_name=comp["comp_name"], cat=category, amount=comp["amount_add"])
 
-        return redirect("home")
+            return redirect("home")
+
+
+class AddNewDeviceAPI(APIView):
+    def get(self, request):
+        components = Components.objects.values_list("comp_name", flat=True)
+        # print(components)
+        return Response({"status": 200, "data": components})
+
+    def post(self, request):
+        serializer = AddNewDeviceSerializer(data=request.data)
+        serializer.is_valid()
+        device_name = request.data["device_name"]
+        comp_data = request.data["comp_data"]
+        try:
+            Devices.objects.filter(device_name=device_name)
+            return Response({"status": 400, "response": "Device already exists"})
+        except:
+            Devices.objects.create(device_name=device_name)
+            device_id = Devices.objects.get(device_name=device_name).device_id
+            # print(device_id)
+            for component in comp_data:
+                comp_name = component["comp_name"]
+                amount_need = component["amount_need"]
+                comp_id = Components.objects.get(comp_name=comp_name).comp_id
+                Connection.objects.create(device_id=device_id, comp_id=comp_id, amount_need=amount_need)
+
+            # print(comp_data)
+            return Response({"ok": "ok"})
+
+
 
 
 def pageNotFound(request, exception):

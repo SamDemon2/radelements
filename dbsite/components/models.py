@@ -15,8 +15,8 @@ class Devices(models.Model):
     device_id = models.AutoField(primary_key=True)
     device_name = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.device_name
+    # def __str__(self):
+    #     return self.device_name
 
 
 class Category(models.Model):

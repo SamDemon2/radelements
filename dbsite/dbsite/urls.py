@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from components.views import *
 
-from components.views import index
+# from components.views import index
 
 # from components.view import *
 
