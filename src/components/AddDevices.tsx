@@ -3,7 +3,45 @@ import React from "react";
 const AddDevices: React.FC = () => {
   return <>
      <div className="ms-3 me-3">
-            <p>asasasasasasasas</p>
+            <div className="row my-3">
+                <div className="col-7">
+                    <form>
+                        <div className="row my-3 bold-text d-flex justify-content-center">
+                            Add New Device
+                        </div>
+                        <div className="row my-3">
+                            <div className="col-3">Input Device Names</div>
+                            <div className="col-5">
+                            <input
+                            name="name"
+                            type="string"
+                            className="w-100"
+                             />
+                             </div>
+                        </div>
+                        <div className="row my-3">
+                            <div className="col-3">Select components</div>
+                            <div className="col-5">
+                                 <select className="form-select w-100"
+                                         aria-label="Default select example"
+                                         name="comp_name">
+                                    <option value="" disabled>Select components</option>
+                                 </select>
+                            </div>
+                        </div>
+                        <div className="row my-3">
+                            <div className="col-3">Input amount</div>
+                            <div className="col-5">
+                                <input
+                                    className="w-100"
+                                    name="amount"
+                                    type="number"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
      </div>
   </>;
 };
