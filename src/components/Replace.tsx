@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchReplaceList } from '../redux/actions'; // Подставьте свои действия
+import { fetchReplaceList } from '../redux/actions';
+import { postReplaceData } from '../api/requests';
 import { RootState } from '../redux/store';
-import {postReplaceData} from "../api/requests";
+import { useNavigate } from 'react-router-dom';
 
 const Replace: React.FC = () => {
     const [selectedElement, setSelectedElement] = useState('');
+    const navigate = useNavigate(); // Хук для навигации
     const dispatch = useDispatch();
 
-    // Подставьте ваш селектор
     const replaceList = useSelector((state: RootState) => state.rootState.tableData.replaced_components.replaceList);
 
     useEffect(() => {
-        dispatch(fetchReplaceList() as any); // Подставьте свой метод получения данных
+        dispatch(fetchReplaceList() as any);
     }, [dispatch]);
 
     const handleElementChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -25,19 +26,19 @@ const Replace: React.FC = () => {
                 replacement_choice: selectedElement,
             };
 
-            // Используем ваш метод для отправки данных
             postReplaceData(data)
                 .then((response) => {
                     console.log('Data sent successfully:', response);
                     // Добавьте необходимую логику после успешной отправки
                     setSelectedElement('');
+                    // Используем navigate для перенаправления
+                    navigate('/my-orders'); // Подставьте свой URL
                 })
                 .catch((error) => {
                     console.error('Error sending data to server:', error);
                 });
         }
     };
-
 
     return (
         <div className="container">
