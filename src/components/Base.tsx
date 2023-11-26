@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchDeviceNames } from '../redux/actions';
 import { postDeviceData } from '../api/requests'; // Подставьте правильный путь
 import { RootState } from "../redux/store";
+import { useNavigate } from 'react-router-dom';
 
 const Base: React.FC = () => {
     const [selectedDevice, setSelectedDevice] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
+    const navigate = useNavigate(); // Хук для навигации
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -34,6 +36,7 @@ const Base: React.FC = () => {
             console.log('Response from the server:', result);
 
             // Можете выполнить какие-то дополнительные действия после успешного запроса, если необходимо
+            navigate('/my-orders'); // Подставьте свой URL
 
         } catch (error) {
             console.error('Error while posting data:', error);

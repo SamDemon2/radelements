@@ -28,3 +28,19 @@ export const postReplaceData = async (data:ReplaceData)=> {
         throw error;
     }
 };
+
+
+interface AddComponentData {
+    category: string;
+    comp_name: string;
+    amount_add: number;
+}
+
+export const postAddComponentData = async (data: AddComponentData[]): Promise<any> => {
+    try {
+        const response = await axios.post(`http://127.0.0.1:8000/api/v1/update/`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
