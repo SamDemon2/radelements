@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 
 const AddDeviceTable: React.FC = () => {
-
+const [deviceName, setDeviceName] = useState('');
     return <>
         <div>
             <table className="table table-dark table-striped table-bordered table-hover">
