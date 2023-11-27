@@ -60,9 +60,10 @@ const AddDevices: React.FC = () => {
                             </div>
                         </div>
                     </form>
-                    <div className="col-4 my-4">
-                        <AddDeviceTable/>
-                    </div>
+
+                </div>
+                <div className="col-4 my-4">
+                    <AddDeviceTable/>
                 </div>
             </div>
      </div>
