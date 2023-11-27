@@ -6,10 +6,13 @@ import AddDeviceTable from "./AddDeviceTable";
 
 const AddDevices: React.FC = () => {
     const dispatch = useDispatch();
-    const CTDNames = useSelector((state: RootState) => state.rootState.tableData.comptodev_componenrs.data);
+    const CTDNames = useSelector(
+        (state: RootState) => state.rootState.tableData.comptodev_componenrs.data
+    );
     const [deviceName, setDeviceName] = useState<string>("");
     const [selectedComponent, setSelectedComponent] = useState<string>("");
     const [amount, setAmount] = useState<number>(0);
+    const [components, setComponents] = useState<{ component: string; amount: number }[]>([]);
 
     useEffect(() => {
         dispatch(fetchCompToDevList() as any);
@@ -27,14 +30,9 @@ const AddDevices: React.FC = () => {
         setAmount(parseInt(e.target.value, 10));
     };
 
-    const handleAddName = () => {
-        // Здесь вы можете использовать значения deviceName для чего-то, если нужно
-        console.log("Add Name:", deviceName);
-    };
-
     const handleAddComponent = () => {
-        // Здесь вы можете использовать значения deviceName, selectedComponent, amount для чего-то, если нужно
-        console.log("Add Component:", deviceName, selectedComponent, amount);
+        // Добавляем компонент в массив
+        setComponents([...components, { component: selectedComponent, amount }]);
     };
 
     return (
@@ -59,15 +57,6 @@ const AddDevices: React.FC = () => {
                                         />
                                     </div>
                                 </div>
-
-                                <div className="row my-3">
-                                    <div className="col-4"></div>
-                                    <div className="col-3">
-                                        <button className="btn btn-primary" onClick={handleAddName}>
-                                            Add Name
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                             <div className="row my-3">
                                 <div className="col-3">Select components</div>
@@ -79,7 +68,9 @@ const AddDevices: React.FC = () => {
                                         value={selectedComponent}
                                         onChange={handleComponentChange}
                                     >
-                                        <option value="" disabled>Select components</option>
+                                        <option value="" disabled>
+                                            Select components
+                                        </option>
                                         {CTDNames.map((device) => (
                                             <option key={device} value={device}>
                                                 {device}
@@ -102,7 +93,11 @@ const AddDevices: React.FC = () => {
                                 <div className="row my-3">
                                     <div className="col-4"></div>
                                     <div className="col-3">
-                                        <button className="btn btn-primary" onClick={handleAddComponent}>
+                                        <button
+                                            type="button"
+                                            className="btn btn-primary"
+                                            onClick={handleAddComponent}
+                                        >
                                             Add Component
                                         </button>
                                     </div>
@@ -111,7 +106,10 @@ const AddDevices: React.FC = () => {
                         </form>
                     </div>
                     <div className="col-4 my-4">
-                        <AddDeviceTable deviceName={deviceName} selectedComponent={selectedComponent} amount={amount} />
+                        <AddDeviceTable
+                            deviceName={deviceName}
+                            components={components}
+                        />
                     </div>
                 </div>
             </div>

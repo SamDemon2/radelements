@@ -2,11 +2,13 @@ import React from "react";
 
 interface AddDeviceTableProps {
     deviceName: string;
-    selectedComponent: string;
-    amount: number;
+    components: { component: string; amount: number }[];
 }
 
-const AddDeviceTable: React.FC<AddDeviceTableProps> = ({ deviceName, selectedComponent, amount }) => {
+const AddDeviceTable: React.FC<AddDeviceTableProps> = ({
+                                                           deviceName,
+                                                           components,
+                                                       }) => {
     return (
         <div>
             <h3>Device Name: {deviceName}</h3>
@@ -19,13 +21,15 @@ const AddDeviceTable: React.FC<AddDeviceTableProps> = ({ deviceName, selectedCom
                 </thead>
                 <tbody className="text-black">
                 {/* Вывод данных только в два последних столбца */}
-                <tr>
-                    <td>{selectedComponent}</td>
-                    <td>{amount}</td>
-                </tr>
+                {components.map((component, index) => (
+                    <tr key={index}>
+                        <td>{component.component}</td>
+                        <td>{component.amount}</td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
-            <button type="button" className="btn btn-primary" /*onClick={handleSentToDatabase}*/>
+            <button type="button" className="btn btn-primary">
                 Sent to database
             </button>
         </div>
