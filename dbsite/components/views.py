@@ -14,7 +14,7 @@ class CompAPIView(generics.ListAPIView):
     serializer_class = IndexSerializer
     # permission_classes = (IsAuthenticated, )
 
-menu = {"ok": "ok"}
+# menu = {"ok": "ok"}
 
 # def index(request):
 #     components = Components.objects.all()
@@ -26,6 +26,7 @@ class DeviceAPI(APIView):
     def get(self, request):
         values = Devices.objects.values_list("device_name", flat=True)
         return Response({"device_names": values})
+
     def post(self, request):
         comp_ids = []
         amount_need = []
@@ -35,43 +36,62 @@ class DeviceAPI(APIView):
         serializer = CompSerializer(data=request.data)
         serializer.is_valid()
         name = request.data["device_name"]
-        print(request.data)
+        # print(request.data)
         device_need = request.data["device_need"]
-        print(name)
-        print(device_need)
-        print("hello")
+        # print(name)
+        # print(device_need)
+        # print("hello")
 
-        with sqlite3.connect("db.sqlite3") as connection:
-            cur = connection.cursor()
-            cur.execute(f"SELECT device_id FROM components_devices WHERE device_name = '{name}'")
+        # with sqlite3.connect("db.sqlite3") as connection:
+        #     cur = connection.cursor()
+        #     cur.execute(f"SELECT device_id FROM components_devices WHERE device_name = '{name}'")
+        #
+        #     device_id = cur.fetchone()[0]
+        #     cur.execute(f"SELECT comp_id, amount_need FROM components_connection WHERE device_id={device_id}")
+        #
+        #     for comp_id in cur.fetchall():
+        #         comp_ids.append(comp_id[0])
+        #         amount_need.append(comp_id[1])
+        #
+        #     amount_need_all = [i * device_need for i in amount_need]
+        #
+        #     for comp_id in comp_ids:
+        #         cur.execute(f"SELECT comp_name, amount FROM components_components WHERE comp_id={comp_id}")
+        #         answer = cur.fetchone()
+        #         comps.append(answer[0])
+        #         amount.append(answer[1])
+        #
+        #     for comp in comps:
+        #         cur.execute(f"SELECT cat FROM components_components WHERE comp_name='{comp}' ")
+        #         comp_cat.append(cur.fetchone()[0])
+        #
+        #     cur.execute("DELETE FROM components_orderdata")
+        #     connection.commit()
+        #
+        #     for i in range(len(comps)):
+        #         cur.execute("""INSERT INTO components_orderdata(comp_name, in_stock, amount_need, cat, enough)
+        #                         VALUES(?,?,?,?,?)""", (comps[i], amount[i], amount_need_all[i], comp_cat[i], 1))
+        #     connection.commit()
+        #     # return redirect("show")
 
-            device_id = cur.fetchone()[0]
-            cur.execute(f"SELECT comp_id, amount_need FROM components_connection WHERE device_id={device_id}")
+        device_id = Devices.objects.get(device_name=name).device_id
+        connection_data = Connection.objects.filter(device_id=device_id).values()
+        for con in connection_data:
+            comp_ids.append(con["comp_id"])
+            amount_need.append(con["amount_need"])
 
-            for comp_id in cur.fetchall():
-                comp_ids.append(comp_id[0])
-                amount_need.append(comp_id[1])
+        amount_need_all = [i * device_need for i in amount_need]
 
-            amount_need_all = [i * device_need for i in amount_need]
+        comps_data = Components.objects.filter(comp_id__in=comp_ids).values_list("comp_name", "amount", "category")
 
-            for comp_id in comp_ids:
-                cur.execute(f"SELECT comp_name, amount FROM components_components WHERE comp_id={comp_id}")
-                answer = cur.fetchone()
-                comps.append(answer[0])
-                amount.append(answer[1])
+        data = OrderData.objects.all()
+        data.delete()
 
-            for comp in comps:
-                cur.execute(f"SELECT cat FROM components_components WHERE comp_name='{comp}' ")
-                comp_cat.append(cur.fetchone()[0])
+        for i in range(len(amount_need_all)):
+            data_instance = OrderData.objects.create(comp_name=comps_data[i][0], in_stock=comps_data[i][1], amount_need=amount_need_all[i], cat=comps_data[i][2], enough=1)
+            data_instance.save()
 
-            cur.execute("DELETE FROM components_orderdata")
-            connection.commit()
-
-            for i in range(len(comps)):
-                cur.execute("""INSERT INTO components_orderdata(comp_name, in_stock, amount_need, cat, enough)
-                                VALUES(?,?,?,?,?)""", (comps[i], amount[i], amount_need_all[i], comp_cat[i], 1))
-            connection.commit()
-            return redirect("show")
+        return redirect("show")
 
 
 class ShowOrderAPI(APIView):
@@ -166,7 +186,8 @@ class AddNewDeviceAPI(APIView):
         device_name = request.data["device_name"]
         comp_data = request.data["comp_data"]
         try:
-            Devices.objects.filter(device_name=device_name)
+            device = Devices.objects.get(device_name=device_name)
+            print(device)
             return Response({"status": 400, "response": "Device already exists"})
         except:
             Devices.objects.create(device_name=device_name)
@@ -179,7 +200,7 @@ class AddNewDeviceAPI(APIView):
                 Connection.objects.create(device_id=device_id, comp_id=comp_id, amount_need=amount_need)
 
             # print(comp_data)
-            return Response({"ok": "ok"})
+            return Response({"status": 200, "response": "Device has been successfully added to database! "})
 
 
 

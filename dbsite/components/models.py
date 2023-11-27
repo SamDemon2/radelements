@@ -3,7 +3,7 @@ from django.db import models
 
 class Components(models.Model):
     comp_id = models.AutoField(primary_key=True)
-    cat = models.IntegerField()
+    category = models.ForeignKey("Category", on_delete=models.PROTECT, null=True)
     comp_name = models.CharField(max_length=255)
     amount = models.IntegerField()
 
