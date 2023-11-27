@@ -44,3 +44,18 @@ export const postAddComponentData = async (data: AddComponentData[]): Promise<an
         throw error;
     }
 };
+
+interface NewDeviceData {
+    device_name: string;
+    comp_data: { comp_name: string; amount_need: number }[];
+}
+
+export const postNewDeviceData = async (data: NewDeviceData): Promise<any> => {
+    try {
+        const response = await axios.post(`http://127.0.0.1:8000/api/v1/add-new-device/`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+

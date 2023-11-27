@@ -1,4 +1,5 @@
 import React from "react";
+import { postNewDeviceData } from "../api/requests";
 
 interface AddDeviceTableProps {
     deviceName: string;
@@ -9,6 +10,34 @@ const AddDeviceTable: React.FC<AddDeviceTableProps> = ({
                                                            deviceName,
                                                            components,
                                                        }) => {
+    const handleSentToDatabase = async () => {
+        try {
+            // Проверка наличия данных перед отправкой
+            if (deviceName && components.length > 0) {
+                const dataToSend = {
+                    device_name: deviceName,
+                    comp_data: components.map(({ component, amount }) => ({
+                        comp_name: component,
+                        amount_need: amount,
+                    })),
+                };
+
+                // Отправка данных на сервер
+                await postNewDeviceData(dataToSend);
+
+                // Выполнение каких-то дополнительных действий после успешной отправки, если необходимо
+
+                console.log("Data sent to the database:", dataToSend);
+            } else {
+                console.error("Please fill in the device name and components before sending.");
+                // Можно вывести сообщение об ошибке или предпринять другие действия
+            }
+        } catch (error) {
+            console.error("Error sending data to the database:", error);
+            // Обработка ошибок
+        }
+    };
+
     return (
         <div>
             <h3>Device Name: {deviceName}</h3>
@@ -29,7 +58,11 @@ const AddDeviceTable: React.FC<AddDeviceTableProps> = ({
                 ))}
                 </tbody>
             </table>
-            <button type="button" className="btn btn-primary">
+            <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleSentToDatabase}
+            >
                 Sent to database
             </button>
         </div>
