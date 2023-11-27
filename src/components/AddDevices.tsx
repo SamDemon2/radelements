@@ -71,6 +71,15 @@ const AddDevices: React.FC = () => {
                                     type="number"
                                 />
                             </div>
+                            <div className="row my-3">
+                                <div className="col-4"></div>
+                                <div className="col-3">
+                                    <button className="btn btn-primary">
+                                        Add  Component
+                                    </button>
+                                </div>
+
+                            </div>
                         </div>
                     </form>
 
