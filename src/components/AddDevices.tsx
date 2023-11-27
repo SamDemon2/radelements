@@ -7,7 +7,7 @@ import AddDeviceTable from "./AddDeviceTable";
 const AddDevices: React.FC = () => {
     const dispatch = useDispatch();
     const CTDNames = useSelector(
-        (state: RootState) => state.rootState.tableData.comptodev_componenrs.data
+        (state: RootState) => state.rootState.tableData.comptodev_components.data
     );
     const [deviceName, setDeviceName] = useState<string>("");
     const [selectedComponent, setSelectedComponent] = useState<string>("");

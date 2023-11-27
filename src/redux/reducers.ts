@@ -49,7 +49,7 @@ export interface TableData {
     device_components: DeviceNamesState;
     add_names_components: AddDeviceNames;
     replaced_components: ReplaceState;
-    comptodev_componenrs: CompToDevNames;
+    comptodev_components: CompToDevNames;
 }
 
 export interface RootState {
@@ -78,7 +78,7 @@ const initialState: RootState = {
         device_components: { device_names: [] },
         add_names_components: {comp_names: [], categories: [] },
         replaced_components: {replaceList: []},
-        comptodev_componenrs: {data: []},
+        comptodev_components: {data: []},
     },
         user: null,
 };
@@ -126,7 +126,7 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                 ...state,
                 tableData: {
                     ...state.tableData,
-                    comptodev_componenrs: {
+                    comptodev_components: {
                         data: action.payload
                     }
                 }
