@@ -1,94 +1,122 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../redux/store";
-import {fetchCompToDevList} from "../redux/actions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { fetchCompToDevList } from "../redux/actions";
 import AddDeviceTable from "./AddDeviceTable";
 
 const AddDevices: React.FC = () => {
     const dispatch = useDispatch();
-    const CTDNames = useSelector((state: RootState)=> state.rootState.tableData.comptodev_componenrs.data);
+    const CTDNames = useSelector((state: RootState) => state.rootState.tableData.comptodev_componenrs.data);
+    const [deviceName, setDeviceName] = useState<string>("");
+    const [selectedComponent, setSelectedComponent] = useState<string>("");
+    const [amount, setAmount] = useState<number>(0);
+
     useEffect(() => {
-        dispatch(fetchCompToDevList() as any)
+        dispatch(fetchCompToDevList() as any);
     }, [dispatch]);
 
-    // if (!CTDNames) {
-    //     // Можете добавить здесь индикатор загрузки или вернуть null
-    //     return <div>Loading...</div>;
-    // }
+    const handleDeviceNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDeviceName(e.target.value);
+    };
 
-  return <>
-     <div className="ms-3 me-3">
-            <div className="row my-3">
-                <div className="col-7">
-                    <form>
-                        <div className="row my-3 bold-text d-flex justify-content-center">
-                            Add New Device
-                        </div>
-                        <div className="row my-3">
-                            <div className="row">
-                                <div className="col-3">Input Device Names</div>
+    const handleComponentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedComponent(e.target.value);
+    };
+
+    const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAmount(parseInt(e.target.value, 10));
+    };
+
+    const handleAddName = () => {
+        // Здесь вы можете использовать значения deviceName для чего-то, если нужно
+        console.log("Add Name:", deviceName);
+    };
+
+    const handleAddComponent = () => {
+        // Здесь вы можете использовать значения deviceName, selectedComponent, amount для чего-то, если нужно
+        console.log("Add Component:", deviceName, selectedComponent, amount);
+    };
+
+    return (
+        <>
+            <div className="ms-3 me-3">
+                <div className="row my-3">
+                    <div className="col-7">
+                        <form>
+                            <div className="row my-3 bold-text d-flex justify-content-center">
+                                Add New Device
+                            </div>
+                            <div className="row my-3">
+                                <div className="row">
+                                    <div className="col-3">Input Device Names</div>
+                                    <div className="col-5">
+                                        <input
+                                            name="name"
+                                            type="string"
+                                            className="w-100"
+                                            value={deviceName}
+                                            onChange={handleDeviceNameChange}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="row my-3">
+                                    <div className="col-4"></div>
+                                    <div className="col-3">
+                                        <button className="btn btn-primary" onClick={handleAddName}>
+                                            Add Name
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row my-3">
+                                <div className="col-3">Select components</div>
+                                <div className="col-5">
+                                    <select
+                                        className="form-select w-100"
+                                        aria-label="Default select example"
+                                        name="comp_name"
+                                        value={selectedComponent}
+                                        onChange={handleComponentChange}
+                                    >
+                                        <option value="" disabled>Select components</option>
+                                        {CTDNames.map((device) => (
+                                            <option key={device} value={device}>
+                                                {device}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="row my-3">
+                                <div className="col-3">Input amount</div>
                                 <div className="col-5">
                                     <input
-                                        name="name"
-                                        type="string"
                                         className="w-100"
+                                        name="amount"
+                                        type="number"
+                                        value={amount}
+                                        onChange={handleAmountChange}
                                     />
                                 </div>
-                            </div>
-
-                            <div className="row my-3">
-                                <div className="col-4"></div>
-                                <div className="col-3">
-                                    <button className="btn btn-primary">
-                                        Add  Name
-                                    </button>
+                                <div className="row my-3">
+                                    <div className="col-4"></div>
+                                    <div className="col-3">
+                                        <button className="btn btn-primary" onClick={handleAddComponent}>
+                                            Add Component
+                                        </button>
+                                    </div>
                                 </div>
-
                             </div>
-
-                        </div>
-                        <div className="row my-3">
-                            <div className="col-3">Select components</div>
-                            <div className="col-5">
-                                 <select className="form-select w-100"
-                                         aria-label="Default select example"
-                                         name="comp_name">
-                                    <option value="" disabled>Select components</option>
-                                     {CTDNames.map((device) => (
-                                         <option key={device} value={device}>
-                                             {device}
-                                         </option>
-                                     ))}
-                                 </select>
-                            </div>
-                        </div>
-                        <div className="row my-3">
-                            <div className="col-3">Input amount</div>
-                            <div className="col-5">
-                                <input
-                                    className="w-100"
-                                    name="amount"
-                                    type="number"
-                                />
-                            </div>
-                            <div className="row my-3">
-                                <div className="col-4"></div>
-                                <div className="col-3">
-                                    <button className="btn btn-primary">
-                                        Add  Component
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-                <div className="col-4 my-4">
-                    <AddDeviceTable/>
+                        </form>
+                    </div>
+                    <div className="col-4 my-4">
+                        <AddDeviceTable deviceName={deviceName} selectedComponent={selectedComponent} amount={amount} />
+                    </div>
                 </div>
             </div>
-     </div>
-  </>;
+        </>
+    );
 };
+
 export default AddDevices;
