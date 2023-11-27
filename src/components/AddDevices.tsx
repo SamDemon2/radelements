@@ -25,14 +25,27 @@ const AddDevices: React.FC = () => {
                             Add New Device
                         </div>
                         <div className="row my-3">
-                            <div className="col-3">Input Device Names</div>
-                            <div className="col-5">
-                            <input
-                            name="name"
-                            type="string"
-                            className="w-100"
-                             />
-                             </div>
+                            <div className="row">
+                                <div className="col-3">Input Device Names</div>
+                                <div className="col-5">
+                                    <input
+                                        name="name"
+                                        type="string"
+                                        className="w-100"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="row my-3">
+                                <div className="col-4"></div>
+                                <div className="col-3">
+                                    <button className="btn btn-primary">
+                                        Add  Name
+                                    </button>
+                                </div>
+
+                            </div>
+
                         </div>
                         <div className="row my-3">
                             <div className="col-3">Select components</div>
