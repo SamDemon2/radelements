@@ -9,6 +9,10 @@ class Components(models.Model):
 
     # def __str__(self):
     #     return self.comp_name
+    class Meta:
+        verbose_name = "Component"
+        verbose_name_plural = "Components"
+        # ordering = ["id"]
 
 
 class Devices(models.Model):
@@ -17,6 +21,10 @@ class Devices(models.Model):
 
     # def __str__(self):
     #     return self.device_name
+    class Meta:
+        verbose_name = "Device"
+        verbose_name_plural = "Devices"
+        # ordering = ["id"]
 
 
 class Category(models.Model):
@@ -25,6 +33,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.cat_name
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+        # ordering = ["id"]
 
 
 class Connection(models.Model):
