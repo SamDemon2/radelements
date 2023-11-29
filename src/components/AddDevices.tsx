@@ -42,11 +42,11 @@ const AddDevices: React.FC = () => {
                     <div className="col-7">
                         <form>
                             <div className="row my-3 bold-text d-flex justify-content-center">
-                                Add New Device
+                                Добавить новое устройство
                             </div>
                             <div className="row my-3">
                                 <div className="row">
-                                    <div className="col-3">Input Device Names</div>
+                                    <div className="col-3">Введите имя устройства</div>
                                     <div className="col-5">
                                         <input
                                             name="name"
@@ -59,7 +59,7 @@ const AddDevices: React.FC = () => {
                                 </div>
                             </div>
                             <div className="row my-3">
-                                <div className="col-3">Select components</div>
+                                <div className="col-3">Выберите компоненты</div>
                                 <div className="col-5">
                                     <select
                                         className="form-select w-100"
@@ -69,7 +69,7 @@ const AddDevices: React.FC = () => {
                                         onChange={handleComponentChange}
                                     >
                                         <option value="" disabled>
-                                            Select components
+                                            Выберите компоненты
                                         </option>
                                         {CTDNames.map((device) => (
                                             <option key={device} value={device}>
@@ -80,7 +80,7 @@ const AddDevices: React.FC = () => {
                                 </div>
                             </div>
                             <div className="row my-3">
-                                <div className="col-3">Input amount</div>
+                                <div className="col-3">Введите количество</div>
                                 <div className="col-5">
                                     <input
                                         className="w-100"
@@ -98,7 +98,7 @@ const AddDevices: React.FC = () => {
                                             className="btn btn-primary"
                                             onClick={handleAddComponent}
                                         >
-                                            Add Component
+                                            Добавить компонент
                                         </button>
                                     </div>
                                 </div>

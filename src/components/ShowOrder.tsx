@@ -47,9 +47,9 @@ const ShowOrder: React.FC = () => {
               <table className="table custom-table table-striped">
                 <thead>
                 <tr>
-                  <th>Component</th>
-                  <th>In stock</th>
-                  <th>Amount need</th>
+                  <th>Компонент</th>
+                  <th>В наличии</th>
+                  <th>Требуется</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -67,7 +67,7 @@ const ShowOrder: React.FC = () => {
           )}
           <div className="">
             <button type="submit" className="btn btn-primary">
-              <Link to={"/my-table"} style={{ textDecoration: 'none', color: 'white' }}> Submit </Link>
+              <Link to={"/my-table"} style={{ textDecoration: 'none', color: 'white' }}> Подтвердить </Link>
             </button>
           </div>
         </div>

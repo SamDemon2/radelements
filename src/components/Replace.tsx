@@ -44,7 +44,7 @@ const Replace: React.FC = () => {
         <div className="container">
             <div className="row my-5">
                 <div className="col-md-6 offset-md-3">
-                    <h3 className="text-center">Select a radio component</h3>
+                    <h3 className="text-center">Выберите компонент</h3>
                     <select
                         className="form-select w-100 mb-3"
                         aria-label="Default select example"

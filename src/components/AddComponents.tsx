@@ -89,18 +89,18 @@ const AddComponents: React.FC = () => {
             <div className="row my-3">
                 <div className="row my-3 bold-text d-flex justify-content-start">
                     <div className="col-8">
-                        Add current comp
+                        Добавить существующий компонент
                     </div>
                 </div>
                 <div className="col-3">
-                    comp_category
+                    Категория
                 </div>
                 <div className="col-5">
                     <select  name="category"
                              value={topFormData.category}
                              onChange={handleTopCategoryChange}
                              className="form-select w-100" aria-label="Default select example">
-                        <option value="" disabled>Chose category</option>
+                        <option value="" disabled>Выберите категорию</option>
                         {compNames.categories.map((category) => (
                             <option key={category} value={category}>
                                 {category}
@@ -113,14 +113,14 @@ const AddComponents: React.FC = () => {
 
             <div className="row my-3">
                 <div className="col-3">
-                    comp_name
+                    Имя
                 </div>
                 <div className="col-5">
                     <select  name="comp_name"
                              value={topFormData.comp_name}
                              onChange={handleTopCompNameChange}
                              className="form-select w-100">
-                        <option value="" disabled>Chose name</option>
+                        <option value="" disabled>Выберите имя</option>
                         {compNames.comp_names.map((name) => (
                             <option key={name} value={name}>
                         {name}
@@ -133,7 +133,7 @@ const AddComponents: React.FC = () => {
 
             <div className="row my-3">
                 <div className="col-3">
-                    amount_add
+                    Количество
                 </div>
                 <div className="col-5 d-flex justify-content-center">
                     <input
@@ -150,7 +150,7 @@ const AddComponents: React.FC = () => {
                 </div>
                 <div className="col-1">
                     <button className="btn btn-primary">
-                        Submit
+                        Подтвердить
                      </button>
                 </div>
             </div>
@@ -158,14 +158,14 @@ const AddComponents: React.FC = () => {
             <div className="row my-4">
                 <div className="row my-3 bold-text d-flex justify-content-start">
                     <div className="col-8">
-                        Add new element
+                        Добавить новый компонент
                     </div>
                 </div>
             </div>
             <form onSubmit={handleBottomSubmit}>
             <div className="row my-3">
                 <div className="col-3">
-                    Category
+                    Категория
                 </div>
                 <div className="col-5 d-flex justify-content-center">
                     <select
@@ -173,7 +173,7 @@ const AddComponents: React.FC = () => {
                         value={bottomFormData.category}
                         onChange={handleBottomCategoryChange}
                         className="form-select w-100" aria-label="Default select example">
-                        <option value="" disabled>Chose category</option>
+                        <option value="" disabled>Выберите категорию</option>
                         {compNames.categories.map((category) => (
                             <option key={category} value={category}>
                                 {category}
@@ -185,7 +185,7 @@ const AddComponents: React.FC = () => {
             <div className="row my-3">
 
             <div className="col-3">
-                comp_name
+                Имя
             </div>
             <div className="col-5 d-flex justify-content-center">
                 <input
@@ -199,7 +199,7 @@ const AddComponents: React.FC = () => {
             </div>
             <div className="row my-3">
                 <div className="col-3">
-                    Amount
+                    Количество
                 </div>
                 <div className="col-5 d-flex justify-content-center">
                     <input
@@ -216,7 +216,7 @@ const AddComponents: React.FC = () => {
                     </div>
                     <div className="col-2 d-flex justify-content-end">
                         <button className="btn btn-primary">
-                            Submit
+                            Подтвердить
                         </button>
                     </div>
 

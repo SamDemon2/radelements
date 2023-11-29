@@ -52,7 +52,7 @@ const Base: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <div className="row my-3">
                     <div className="col-md-2 d-flex">
-                        <span>Select device name</span>
+                        <span>Выберите имя устройства</span>
                     </div>
                     <div className="col-md-3">
                         <select
@@ -61,7 +61,7 @@ const Base: React.FC = () => {
                             value={selectedDevice}
                             onChange={handleDeviceChange}
                         >
-                            <option value="" disabled>Select device name</option>
+                            <option value="" disabled>Выберите имя устройства</option>
                             {reduxTableData.map((device) => (
                                 <option key={device} value={device}>
                                     {device}
@@ -72,7 +72,7 @@ const Base: React.FC = () => {
                 </div>
                 <div className="row my-3">
                     <div className="col-md-2 d-flex">
-                        <span>Select amount</span>
+                        <span>Введите количество</span>
                     </div>
                     <div className="col-md-3">
                         <input
@@ -86,7 +86,7 @@ const Base: React.FC = () => {
                 <div className="row my-3">
                     <div className="col-md-2 d-flex justify-content-start">
                         <button type="submit" className="btn btn-primary">
-                            Submit
+                            Подтвердить
                         </button>
                     </div>
                 </div>

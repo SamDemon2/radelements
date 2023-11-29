@@ -12,25 +12,25 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link" aria-current="page" href="/my-table">MainTable</a>
+                            <a className="nav-link" aria-current="page" href="/my-table">Компоненты</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/my-base">Device</a>
+                            <a className="nav-link" href="/my-base">Устройства</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/my-replace">Replace</a>
+                            <a className="nav-link" href="/my-replace">Замена</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/my-orders">ShowOrder</a>
+                            <a className="nav-link" href="/my-orders">Заказы</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/my-add">AddComponents</a>
+                            <a className="nav-link" href="/my-add">Добавить компонент</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/my-add-devices">AddDevices</a>
+                            <a className="nav-link" href="/my-add-devices">Добавить устройство</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/my-auth">Authentication</a>
+                            <a className="nav-link" href="/my-auth">Авторизация</a>
                         </li>
                     </ul>
                 </div>

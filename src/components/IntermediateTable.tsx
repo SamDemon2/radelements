@@ -64,7 +64,7 @@ const IntermediateTable = () => {
                 </tbody>
             </table>
             <button type="button" className="btn btn-primary" onClick={handleSentToDatabase}>
-                Sent to database
+                В базу данных
             </button>
         </div>
     );

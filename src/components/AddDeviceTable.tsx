@@ -63,7 +63,7 @@ const AddDeviceTable: React.FC<AddDeviceTableProps> = ({
                 className="btn btn-primary"
                 onClick={handleSentToDatabase}
             >
-                Sent to database
+                В базу данных
             </button>
         </div>
     );
