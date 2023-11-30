@@ -26,5 +26,3 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("components.urls"), name="home")
 ]
-
-handler404 = pageNotFound

@@ -57,6 +57,7 @@ class OrderData(models.Model):
 class Replace(models.Model):
     comp_name = models.CharField(max_length=255)
     cat = models.IntegerField()
+    in_stock = models.IntegerField(null=True)
 
     def __str__(self):
         return self.comp_name

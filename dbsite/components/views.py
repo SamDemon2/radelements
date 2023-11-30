@@ -1,5 +1,5 @@
-from django.http import HttpResponseNotFound
-from django.shortcuts import render, redirect
+
+from django.shortcuts import redirect
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -12,13 +12,7 @@ import sqlite3
 class CompAPIView(generics.ListAPIView):
     queryset = Components.objects.all()
     serializer_class = IndexSerializer
-    # permission_classes = (IsAuthenticated, )
-
-# menu = {"ok": "ok"}
-
-# def index(request):
-#     components = Components.objects.all()
-#     return render(request, "components/index.html", {"title": "Main page", "menu": menu, "components": components})
+    permission_classes = (IsAuthenticated, )
 
 
 class DeviceAPI(APIView):
@@ -36,11 +30,7 @@ class DeviceAPI(APIView):
         serializer = CompSerializer(data=request.data)
         serializer.is_valid()
         name = request.data["device_name"]
-        # print(request.data)
         device_need = request.data["device_need"]
-        # print(name)
-        # print(device_need)
-        # print("hello")
 
         # with sqlite3.connect("db.sqlite3") as connection:
         #     cur = connection.cursor()
@@ -110,18 +100,19 @@ class ShowOrderAPI(APIView):
                 in_stock.append(answer[2])
                 amount_need.append(answer[3])
                 cat.append(answer[4])
-            # print(comp_name)
+
             for i in range(len(in_stock)):
                 if in_stock[i] < amount_need[i]:
                     comp_name_ = comp_name[i]
                     cat_rep = cat[i]
                     Replace.objects.all().delete()
                     OrderData.objects.filter(comp_name=comp_name_).update(enough=0)
-                    cur.execute(f"SELECT comp_name FROM components_components WHERE cat={cat_rep} and amount > {amount_need[i]}")
-                    comp_for_rep = cur.fetchall()
+                    # cur.execute(f"SELECT comp_name, amount FROM components_components WHERE category_id={cat_rep} and amount > {amount_need[i]}")
+                    comp_for_rep = Components.objects.filter(Q(amount__gte=amount_need[i]) & Q(category_id=cat_rep)).values("comp_name", "amount")
+                    # comp_for_rep = cur.fetchall()
+                    print(comp_for_rep)
                     for c in comp_for_rep:
-                        cur.execute(f"INSERT INTO components_replace( comp_name, cat) VALUES(?, ?)", (c[0], cat_rep))
-                    # return redirect("replace" + "/1")
+                        Replace.objects.create(comp_name=c["comp_name"], in_stock=c["amount"], cat=cat_rep)
                     return redirect("replace")
 
             count = 0
@@ -135,15 +126,17 @@ class ShowOrderAPI(APIView):
 class ReplaceAPI(APIView):
     # permission_classes = (IsAuthenticated, )
     def get(self, request):
-        comps_to_replace = Replace.objects.all().values_list("comp_name", flat=True)
-        return Response({"status": 200, "data": comps_to_replace})
+        # comps_to_replace = Replace.objects.all().values_list("comp_name", flat=True)
+        comp_name = OrderData.objects.filter(enough=0).values("comp_name")[0]["comp_name"]
+        comps_to_replace = Replace.objects.values("comp_name", "in_stock")
+
+        return Response({"status": 200, "comp_to_replace": comp_name, "data": comps_to_replace})
 
     def post(self, request):
         serializer = ReplaceSerializer(data=request.data)
         serializer.is_valid()
         comp_name = request.data["replacement_choice"]
         in_stock = Components.objects.filter(comp_name=comp_name).values("amount")
-        # return redirect("home")
         OrderData.objects.filter(enough=0).update(enough=1, comp_name=str(comp_name), in_stock=in_stock)
         return redirect("show")
 
@@ -192,7 +185,6 @@ class AddNewDeviceAPI(APIView):
         except:
             Devices.objects.create(device_name=device_name)
             device_id = Devices.objects.get(device_name=device_name).device_id
-            # print(device_id)
             for component in comp_data:
                 comp_name = component["comp_name"]
                 amount_need = component["amount_need"]
@@ -202,8 +194,3 @@ class AddNewDeviceAPI(APIView):
             # print(comp_data)
             return Response({"status": 200, "response": "Device has been successfully added to database! "})
 
-
-
-
-def pageNotFound(request, exception):
-    return HttpResponseNotFound("<h1>Page not found</h1>")
