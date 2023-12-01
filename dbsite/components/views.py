@@ -1,4 +1,3 @@
-
 from django.shortcuts import redirect
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
@@ -6,13 +5,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
 from .utils import *
-import sqlite3
 
 
 class CompAPIView(generics.ListAPIView):
     queryset = Components.objects.all()
     serializer_class = IndexSerializer
-    permission_classes = (IsAuthenticated, )
+    # permission_classes = (IsAuthenticated, )
 
 
 class DeviceAPI(APIView):
@@ -24,45 +22,10 @@ class DeviceAPI(APIView):
     def post(self, request):
         comp_ids = []
         amount_need = []
-        amount = []
-        comps = []
-        comp_cat = []
         serializer = CompSerializer(data=request.data)
         serializer.is_valid()
         name = request.data["device_name"]
         device_need = request.data["device_need"]
-
-        # with sqlite3.connect("db.sqlite3") as connection:
-        #     cur = connection.cursor()
-        #     cur.execute(f"SELECT device_id FROM components_devices WHERE device_name = '{name}'")
-        #
-        #     device_id = cur.fetchone()[0]
-        #     cur.execute(f"SELECT comp_id, amount_need FROM components_connection WHERE device_id={device_id}")
-        #
-        #     for comp_id in cur.fetchall():
-        #         comp_ids.append(comp_id[0])
-        #         amount_need.append(comp_id[1])
-        #
-        #     amount_need_all = [i * device_need for i in amount_need]
-        #
-        #     for comp_id in comp_ids:
-        #         cur.execute(f"SELECT comp_name, amount FROM components_components WHERE comp_id={comp_id}")
-        #         answer = cur.fetchone()
-        #         comps.append(answer[0])
-        #         amount.append(answer[1])
-        #
-        #     for comp in comps:
-        #         cur.execute(f"SELECT cat FROM components_components WHERE comp_name='{comp}' ")
-        #         comp_cat.append(cur.fetchone()[0])
-        #
-        #     cur.execute("DELETE FROM components_orderdata")
-        #     connection.commit()
-        #
-        #     for i in range(len(comps)):
-        #         cur.execute("""INSERT INTO components_orderdata(comp_name, in_stock, amount_need, cat, enough)
-        #                         VALUES(?,?,?,?,?)""", (comps[i], amount[i], amount_need_all[i], comp_cat[i], 1))
-        #     connection.commit()
-        #     # return redirect("show")
 
         device_id = Devices.objects.get(device_name=name).device_id
         connection_data = Connection.objects.filter(device_id=device_id).values()
@@ -92,34 +55,32 @@ class ShowOrderAPI(APIView):
         in_stock = []
         amount_need = []
         cat = []
-        with sqlite3.connect("db.sqlite3") as connection:
-            cur = connection.cursor()
-            cur.execute("SELECT * FROM components_orderdata")
-            for answer in cur.fetchall():
-                comp_name.append(answer[1])
-                in_stock.append(answer[2])
-                amount_need.append(answer[3])
-                cat.append(answer[4])
+        order_data = OrderData.objects.all().values()
+        for component in order_data:
+            comp_name.append(component["comp_name"])
+            in_stock.append(component["in_stock"])
+            amount_need.append(component["amount_need"])
+            cat.append(component["cat"])
 
-            for i in range(len(in_stock)):
-                if in_stock[i] < amount_need[i]:
-                    comp_name_ = comp_name[i]
-                    cat_rep = cat[i]
-                    Replace.objects.all().delete()
-                    OrderData.objects.filter(comp_name=comp_name_).update(enough=0)
-                    # cur.execute(f"SELECT comp_name, amount FROM components_components WHERE category_id={cat_rep} and amount > {amount_need[i]}")
-                    comp_for_rep = Components.objects.filter(Q(amount__gte=amount_need[i]) & Q(category_id=cat_rep)).values("comp_name", "amount")
-                    # comp_for_rep = cur.fetchall()
-                    print(comp_for_rep)
-                    for c in comp_for_rep:
-                        Replace.objects.create(comp_name=c["comp_name"], in_stock=c["amount"], cat=cat_rep)
-                    return redirect("replace")
+        for i in range(len(in_stock)):
+            if in_stock[i] < amount_need[i]:
+                comp_name_ = comp_name[i]
+                cat_rep = cat[i]
+                Replace.objects.all().delete()
+                OrderData.objects.filter(comp_name=comp_name_).update(enough=0)
+                comp_for_rep = Components.objects.filter(
+                    Q(amount__gte=amount_need[i]) & Q(category_id=cat_rep)).values("comp_name", "amount")
+                for c in comp_for_rep:
+                    Replace.objects.create(comp_name=c["comp_name"], in_stock=c["amount"], cat=cat_rep)
+                return redirect("replace")
 
-            count = 0
-            for comp in comp_name:
-                new_amount = in_stock[count] - amount_need[count]
-                count += 1
-                cur.execute(f"UPDATE components_components SET amount = ? WHERE comp_name='{comp}' ", (new_amount,))
+        for i in range(len(comp_name)):
+            amount = Components.objects.filter(comp_name=comp_name[i]).values("amount")[0]["amount"]
+            print(amount)
+            amount -= amount_need[i]
+            OrderData.objects.filter(comp_name=comp_name[i]).update(in_stock=amount)
+            Components.objects.filter(comp_name=comp_name[i]).update(amount=amount)
+
         return Response({"order_data": ShowSerializer(info, many=True).data})
 
 
@@ -162,7 +123,7 @@ class UpdateDBAPI(APIView):
             except:
                 component = Category.objects.get(cat_name=comp["category"])
                 category = component.cat_id
-                Components.objects.create(comp_name=comp["comp_name"], cat=category, amount=comp["amount_add"])
+                Components.objects.create(comp_name=comp["comp_name"], category_id=category, amount=comp["amount_add"])
 
             return redirect("home")
 
@@ -191,6 +152,5 @@ class AddNewDeviceAPI(APIView):
                 comp_id = Components.objects.get(comp_name=comp_name).comp_id
                 Connection.objects.create(device_id=device_id, comp_id=comp_id, amount_need=amount_need)
 
-            # print(comp_data)
             return Response({"status": 200, "response": "Device has been successfully added to database! "})
 
