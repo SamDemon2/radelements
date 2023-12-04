@@ -10,7 +10,7 @@ const Replace: React.FC = () => {
     const navigate = useNavigate(); // Хук для навигации
     const dispatch = useDispatch();
 
-    const replaceList = useSelector((state: RootState) => state.rootState.tableData.replaced_components.replaceList);
+    const replaceList = useSelector((state: RootState) => state.rootState.tableData.replaced_components);
 
     useEffect(() => {
         dispatch(fetchReplaceList() as any);
@@ -53,8 +53,8 @@ const Replace: React.FC = () => {
                     >
                         <option value="">--------</option>
                         {replaceList.map((element) => (
-                            <option key={element} value={element}>
-                                {element}
+                            <option key={element.comp_name} value={element.comp_name}>
+                                {`${element.comp_name} - In Stock: ${element.in_stock}`}
                             </option>
                         ))}
                     </select>
