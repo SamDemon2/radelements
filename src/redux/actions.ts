@@ -3,7 +3,7 @@ import {
     RadioComponent,
     OrderItem,
     IntermediateComponent,
-    DeviceNamesState, AddDeviceNames, CompToDevNames
+    DeviceNamesState, AddDeviceNames, CompToDevNames, ReplaceState
 } from "./reducers"; // Импортируем интерфейсы из reducers
 import axios from "axios";
 
@@ -120,17 +120,17 @@ export const fetchAddNames = () => {
     };
 };
 
-export const setReplaceList = (replaceList: string[]) => ({
+export const setReplaceList = (data: ReplaceState) => ({
     type: 'SET_REPLACE_LIST',
-    payload: replaceList,
+    payload: data,
 });
 
 export const fetchReplaceList = () => {
     return async (dispatch: Dispatch) => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/replace/');
-            const replaceList = response.data.data;
-            dispatch(setReplaceList(replaceList));
+            const data = response.data.data;
+            dispatch(setReplaceList(data));
         } catch (error) {
             console.error('Error fetching replace list:', error);
         }

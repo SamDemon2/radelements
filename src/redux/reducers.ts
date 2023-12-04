@@ -19,12 +19,10 @@ export interface IntermediateComponent {
     amount: number;
 }
 
-export interface AddDeviceComponent {
-    device_name: string;
 
-}
 export interface ReplaceState  {
-    replaceList: string[];
+    comp_name: string;
+    in_stock: number;
 }
 
 export interface DeviceNamesState {
@@ -48,7 +46,7 @@ export interface TableData {
     inter_components: IntermediateComponent[];
     device_components: DeviceNamesState;
     add_names_components: AddDeviceNames;
-    replaced_components: ReplaceState;
+    replaced_components: ReplaceState[];
     comptodev_components: CompToDevNames;
 }
 
@@ -63,7 +61,7 @@ type ActionTypes =
     | { type: 'SET_SHOW_DATA'; payload: OrderItem[] }
     | { type: 'ADD_INTERMEDIATE_DATA'; payload: IntermediateComponent }
     | { type: 'SET_DEVICE_NAMES'; payload: string[] }
-    | { type: 'SET_REPLACE_LIST'; payload: string[] }
+    | { type: 'SET_REPLACE_LIST'; payload: ReplaceState[] }
     | { type: 'SET_COMPTODEV_LIST'; payload: string[] }
     | { type: 'ADD_NEW_DEVICE_NAMES'; payload: AddDeviceNames}
     | { type: 'LOGIN'; payload: User }
@@ -77,7 +75,7 @@ const initialState: RootState = {
         inter_components: [],
         device_components: { device_names: [] },
         add_names_components: {comp_names: [], categories: [] },
-        replaced_components: {replaceList: []},
+        replaced_components: [],
         comptodev_components: {data: []},
     },
         user: null,
@@ -116,9 +114,7 @@ const rootReducer: Reducer<RootState, ActionTypes> = (state = initialState, acti
                 ...state,
                 tableData: {
                     ...state.tableData,
-                    replaced_components: {
-                        replaceList: action.payload
-                    }
+                    replaced_components: action.payload
                 }
             };
         case 'SET_COMPTODEV_LIST':
