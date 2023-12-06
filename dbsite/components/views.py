@@ -113,6 +113,7 @@ class UpdateDBAPI(APIView):
     def post(self, request):
         serializer = UpdateSerializer(data=request.data)
         serializer.is_valid()
+        print(request.data)
         for comp in request.data:
             amount_add = int(comp["amount_add"])
             try:
@@ -125,7 +126,7 @@ class UpdateDBAPI(APIView):
                 category = component.cat_id
                 Components.objects.create(comp_name=comp["comp_name"], category_id=category, amount=comp["amount_add"])
 
-            return redirect("home")
+        return redirect("home")
 
 
 class AddNewDeviceAPI(APIView):
