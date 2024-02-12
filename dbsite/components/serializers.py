@@ -45,7 +45,7 @@ class AddNewDeviceSerializer(serializers.Serializer):
 
 class UserCreateDisabledSerializer(UserCreateSerializer):
     def validate(self, attrs):
-        raise serializers.ValidationError("Regstration is disabled.")  # Выбросить ошибку при попытке регистрации
+        raise serializers.ValidationError("Registration is disabled.")  # Выбросить ошибку при попытке регистрации
 
     def save(self):
         return super().save()

@@ -107,13 +107,11 @@ class UpdateDBAPI(APIView):
     def get(self, request):
         values = Components.objects.values_list("comp_name", flat=True)
         categories = Category.objects.values_list("cat_name", flat=True)
-        print(values)
         return Response({"status": 200, "comp_names": values, "categories": categories})
 
     def post(self, request):
         serializer = UpdateSerializer(data=request.data)
         serializer.is_valid()
-        print(request.data)
         for comp in request.data:
             amount_add = int(comp["amount_add"])
             try:
