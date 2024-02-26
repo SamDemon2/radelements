@@ -8,6 +8,18 @@ from .utils import *
 import sqlite3
 
 
+# class MoveDataAPI(APIView):
+#     def get(self, request):
+#         with sqlite3.connect("db.sqlite3") as connection:
+#             cur = connection.cursor()
+#             data = cur.execute("SELECT * FROM сomponents_components ORDER BY id").fetchall()
+#             print(data)
+#             # for d in data:
+#             #     Devices.objects.create(comp_name=d[1], price=d[2], description=d[3], photo=d[4], is_published=d[5],
+#             #                             category_id=d[6], country_id=d[7])
+#             return Response({"ok":"ok"})
+
+
 class CompAPIView(generics.ListAPIView):
     queryset = Components.objects.all()
     serializer_class = IndexSerializer
@@ -168,9 +180,14 @@ class MoveDataAPI(APIView):
     def get(self, request):
         with sqlite3.connect("db.sqlite3") as connection:
             cur = connection.cursor()
-            data = cur.execute("SELECT * FROM components_components ORDER BY comp_id").fetchall()
+            # data = cur.execute("SELECT * FROM components_components ORDER BY comp_id").fetchall()
+            # print(data)
+            # for d in data:
+            #     cat = Category.objects.get(cat_id=d[3])
+            #     Components.objects.create(comp_name=d[1], amount=d[2], category=cat)
+            data = cur.execute("SELECT * FROM components_connection ORDER BY id").fetchall()
             print(data)
             for d in data:
-                cat = Category.objects.get(cat_id=d[3])
-                Components.objects.create(comp_id=d[0], comp_name=d[1], amount=d[2], cat=cat)
+
+                Connection.objects.create(device_id=d[1], comp_id=d[2], amount_need=d[3])
             return Response({"ok": "ok"})
