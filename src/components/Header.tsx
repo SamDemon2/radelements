@@ -29,9 +29,9 @@ const Header = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="/my-add-devices">Добавить устройство</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/my-auth">Авторизация</a>
-                        </li>
+                        {/*<li className="nav-item">*/}
+                        {/*    <a className="nav-link" href="/my-auth">Авторизация</a>*/}
+                        {/*</li>*/}
                     </ul>
                 </div>
             </div>
