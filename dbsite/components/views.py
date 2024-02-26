@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
 from .utils import *
+import sqlite3
 
 
 class CompAPIView(generics.ListAPIView):
@@ -29,6 +30,8 @@ class DeviceAPI(APIView):
 
         device_id = Devices.objects.get(device_name=name).device_id
         connection_data = Connection.objects.filter(device_id=device_id).values()
+        # device_id = Devices.objects.get(device_name=name).id
+        # connection_data = Connection.objects.filter(device_id=device_id).values()
         for con in connection_data:
             comp_ids.append(con["comp_id"])
             amount_need.append(con["amount_need"])
@@ -121,8 +124,8 @@ class UpdateDBAPI(APIView):
                 Components.objects.filter(comp_name=comp_name).update(amount=new_amount)
             except:
                 component = Category.objects.get(cat_name=comp["category"])
-                category = component.cat_id
-                Components.objects.create(comp_name=comp["comp_name"], category_id=category, amount=comp["amount_add"])
+                category = component
+                Components.objects.create(comp_name=comp["comp_name"], category=category, amount=comp["amount_add"])
 
         return redirect("home")
 
@@ -143,13 +146,31 @@ class AddNewDeviceAPI(APIView):
             print(device)
             return Response({"status": 400, "response": "Device already exists"})
         except:
-            Devices.objects.create(device_name=device_name)
+            # Devices.objects.create(device_name=device_name)
             device_id = Devices.objects.get(device_name=device_name).device_id
             for component in comp_data:
                 comp_name = component["comp_name"]
                 amount_need = component["amount_need"]
                 comp_id = Components.objects.get(comp_name=comp_name).comp_id
                 Connection.objects.create(device_id=device_id, comp_id=comp_id, amount_need=amount_need)
+            # Devices.objects.create(device_name=device_name)
+            # device_id = Devices.objects.get(device_name=device_name).id
+            # for component in comp_data:
+            #     comp_name = component["comp_name"]
+            #     amount_need = component["amount_need"]
+            #     comp_id = Components.objects.get(comp_name=comp_name).comp_id
+            #     Connection.objects.create(device_id=device_id, comp_id=comp_id, amount_need=amount_need)
 
             return Response({"status": 200, "response": "Device has been successfully added to database! "})
 
+
+class MoveDataAPI(APIView):
+    def get(self, request):
+        with sqlite3.connect("db.sqlite3") as connection:
+            cur = connection.cursor()
+            data = cur.execute("SELECT * FROM components_components ORDER BY comp_id").fetchall()
+            print(data)
+            for d in data:
+                cat = Category.objects.get(cat_id=d[3])
+                Components.objects.create(comp_id=d[0], comp_name=d[1], amount=d[2], cat=cat)
+            return Response({"ok": "ok"})

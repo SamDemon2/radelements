@@ -16,7 +16,7 @@ class Components(models.Model):
 
 
 class Devices(models.Model):
-    device_id = models.AutoField(primary_key=True)
+    device_id = models.BigAutoField(primary_key=True)
     device_name = models.CharField(max_length=255)
 
     # def __str__(self):
@@ -24,7 +24,9 @@ class Devices(models.Model):
     class Meta:
         verbose_name = "Device"
         verbose_name_plural = "Devices"
-        # ordering = ["id"]
+
+
+
 
 
 class Category(models.Model):
