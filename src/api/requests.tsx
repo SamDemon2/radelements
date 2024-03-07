@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+// Через урл надо было делать
+
 const baseURL = 'http://127.0.0.1:8000/api/v1/';
 
 interface DeviceData {
