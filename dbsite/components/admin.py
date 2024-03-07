@@ -14,9 +14,19 @@ class ComponentsAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("cat_id", "cat_name")
-    fields = ("comp_name", )
+    list_display = ("cat_name",)
+    fields = ("cat_name",)
+
+
+class DeviceAdmin(admin.ModelAdmin):
+    list_display = ("device_name", )
+
+
+class ConnectionAdmin(admin.ModelAdmin):
+    list_display = ("device_id", )
 
 
 admin.site.register(Components, ComponentsAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Devices, DeviceAdmin)
+admin.site.register(Connection, ConnectionAdmin)

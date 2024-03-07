@@ -8,6 +8,8 @@ from .utils import *
 import sqlite3
 
 
+
+
 # class MoveDataAPI(APIView):
 #     def get(self, request):
 #         with sqlite3.connect("db.sqlite3") as connection:
@@ -153,12 +155,14 @@ class AddNewDeviceAPI(APIView):
         serializer.is_valid()
         device_name = request.data["device_name"]
         comp_data = request.data["comp_data"]
-        try:
-            device = Devices.objects.get(device_name=device_name)
-            print(device)
+        # try:
+        device = Devices.objects.filter(device_name=device_name)
+        if device:
+            # print(device)
             return Response({"status": 400, "response": "Device already exists"})
-        except:
-            # Devices.objects.create(device_name=device_name)
+        # except :
+        else:
+            Devices.objects.create(device_name=device_name)
             device_id = Devices.objects.get(device_name=device_name).device_id
             for component in comp_data:
                 comp_name = component["comp_name"]

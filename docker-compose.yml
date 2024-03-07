@@ -46,6 +46,23 @@ services:
 #
 #
 #
+#  nginx:
+#    container_name: nginx
+#    image: nginx
+#    volumes:
+#      - static_volume:/code/static
+#      - media_volume:/code/media
+#    depends_on:
+#      - downloader
+#    ports:
+#      - "8001:8001"
+  frontend:
+    build:
+      context: ./RadElements/radelements
+#      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
 volumes:
   postgres_data:
   static_volume:

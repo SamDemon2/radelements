@@ -26,9 +26,6 @@ class Devices(models.Model):
         verbose_name_plural = "Devices"
 
 
-
-
-
 class Category(models.Model):
     cat_id = models.AutoField(primary_key=True)
     cat_name = models.CharField(max_length=255)
