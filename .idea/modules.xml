@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/DataBaseForComponents.iml" filepath="$PROJECT_DIR$/.idea/DataBaseForComponents.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/radelements.iml" filepath="$PROJECT_DIR$/.idea/radelements.iml" />
+>>>>>>> Radelements/test_one
     </modules>
   </component>
 </project>
