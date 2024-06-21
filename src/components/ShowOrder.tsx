@@ -34,11 +34,11 @@ const ShowOrder: React.FC = () => {
   const hasData = reduxTableData && reduxTableData.length > 0;
 
   // Если данных нет, автоматически выполняем редирект
-  useEffect(() => {
-    if (!hasData) {
-      navigate("/my-replace");
-    }
-  }, [hasData, navigate]);
+  // useEffect(() => {
+  //   if (!hasData) {
+  //     navigate("/my-replace");
+  //   }
+  // }, [hasData, navigate]);
 
   return (
       <>
