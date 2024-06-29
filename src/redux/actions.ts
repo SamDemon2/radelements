@@ -30,7 +30,7 @@ export const setShowData = (data: OrderItem[]) => ({
 export const fetchTableData = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get('http://localhost:8000/api/v1/complist/');
+            const response = await axios.get('http://radcomponents.ru:8000/api/v1/complist/');
             const data = response.data;
 
             // Используем новые интерфейсы
@@ -57,7 +57,7 @@ export const fetchTableData = () => {
 export const fetchShowData = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get('http://localhost:8000/api/v1/show/');
+            const response = await axios.get('http://radcomponents.ru:8000/api/v1/show/');
             const data = response.data.order_data;
 
             const showData = data.map((item: any) => ({
@@ -86,7 +86,7 @@ export const setDeviceNames = (deviceNames: DeviceNamesState) => ({
 export const fetchDeviceNames = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/add/');
+            const response = await axios.get('http://radcomponents.ru:8000/api/v1/add/');
             const deviceNames = response.data.device_names;
             console.log('Device names from the server:', deviceNames);
             dispatch(setDeviceNames(deviceNames));
@@ -106,7 +106,7 @@ export const setAddNames = (data: AddDeviceNames) => ({
 export const fetchAddNames = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/update/');
+            const response = await axios.get('http://radcomponents.ru:8000/api/v1/update/');
             //const data = response.data;
             const addData: AddDeviceNames = {
                 comp_names: response.data.comp_names,
@@ -128,7 +128,7 @@ export const setReplaceList = (data: ReplaceState) => ({
 export const fetchReplaceList = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/replace/');
+            const response = await axios.get('http://radcomponents.ru:8000/api/v1/replace/');
             const data = response.data.data;
             dispatch(setReplaceList(data));
         } catch (error) {
@@ -144,7 +144,7 @@ export const setCompToDevList= (data: CompToDevNames) => ({
 export const fetchCompToDevList = () => {
   return async (dispatch: Dispatch) => {
       try {
-          const response = await  axios.get('http://127.0.0.1:8000/api/v1/add-new-device/');
+          const response = await  axios.get('http://radcomponents.ru:8000/api/v1/add-new-device/');
           const data = response.data.data;
           dispatch(setCompToDevList(data));
       } catch (error) {
